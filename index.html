@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>¿Quieres ser mi San Valentín? 💘</title>
+  <title>Massiel 💘 ¿Elegimos volver?</title>
   <style>
     :root{
       --bg1:#ff5aa5;
@@ -13,6 +13,7 @@
       --muted:#6b7280;
       --yes:#16a34a;
       --no:#ef4444;
+      --ink:#0f172a;
     }
 
     *{box-sizing:border-box;}
@@ -41,6 +42,7 @@
       animation: floatUp linear forwards;
       filter: drop-shadow(0 8px 18px rgba(0,0,0,.15));
       opacity:.9;
+      pointer-events:none;
     }
     .heart::before, .heart::after{
       content:"";
@@ -56,11 +58,11 @@
     @keyframes floatUp{
       0%{ transform: translateY(40px) rotate(45deg) scale(0.8); opacity:0; }
       10%{ opacity:.95; }
-      100%{ transform: translateY(-110vh) rotate(45deg) scale(1.3); opacity:0; }
+      100%{ transform: translateY(-110vh) rotate(45deg) scale(1.25); opacity:0; }
     }
 
     .wrap{
-      width:min(560px, 92vw);
+      width:min(620px, 92vw);
       position:relative;
       z-index:2;
     }
@@ -69,7 +71,7 @@
       background: rgba(255,255,255,.92);
       border: 1px solid rgba(255,255,255,.45);
       box-shadow: 0 25px 60px rgba(0,0,0,.20);
-      border-radius: 26px;
+      border-radius: 28px;
       padding: 26px 22px;
       backdrop-filter: blur(8px);
     }
@@ -80,26 +82,35 @@
       align-items:center;
       padding:8px 12px;
       border-radius: 999px;
-      font-weight:700;
+      font-weight:800;
       background: rgba(255,90,165,.14);
       color:#b4236b;
       border:1px solid rgba(255,90,165,.25);
+      letter-spacing:.2px;
     }
 
     h1{
       margin:14px 0 8px;
-      font-size: clamp(26px, 4.3vw, 40px);
+      font-size: clamp(26px, 4.3vw, 42px);
       line-height:1.05;
       letter-spacing:-0.02em;
       text-align:center;
+      color: var(--ink);
+    }
+
+    h2{
+      margin: 10px 0 6px;
+      text-align:center;
+      letter-spacing:-0.02em;
+      color: var(--ink);
     }
 
     p{
       margin:0;
       color:var(--muted);
       text-align:center;
-      font-size: 15.5px;
-      line-height:1.45;
+      font-size: 15.7px;
+      line-height:1.5;
     }
 
     .photo{
@@ -115,10 +126,7 @@
       position:relative;
       overflow:hidden;
     }
-    .photo span{
-      font-size:48px;
-      transform: translateY(2px);
-    }
+    .photo span{ font-size:48px; transform: translateY(2px); }
 
     .row{
       display:flex;
@@ -131,7 +139,7 @@
     button{
       border:0;
       padding: 12px 18px;
-      font-weight:800;
+      font-weight:900;
       border-radius: 16px;
       cursor:pointer;
       font-size:16px;
@@ -141,16 +149,10 @@
     }
     button:active{ transform: translateY(2px) scale(.98); }
 
-    .btn-yes{
-      background: linear-gradient(135deg, #22c55e, #15803d);
-      color:#fff;
-    }
-
-    .btn-no{
-      background: linear-gradient(135deg, #fb7185, #ef4444);
-      color:#fff;
-      position:relative;
-    }
+    .btn-yes{ background: linear-gradient(135deg, #22c55e, #15803d); color:#fff; }
+    .btn-no{ background: linear-gradient(135deg, #fb7185, #ef4444); color:#fff; position:relative; }
+    .btn-dark{ background:#111827; color:#fff; }
+    .btn-ghost{ background: rgba(17,24,39,.08); color:#111827; box-shadow:none; }
 
     .mini{
       display:flex;
@@ -165,10 +167,11 @@
       background: rgba(255,255,255,.6);
       padding: 9px 12px;
       border-radius: 999px;
-      font-weight:700;
+      font-weight:800;
       font-size: 13px;
       cursor:pointer;
       color:#374151;
+      box-shadow:none;
     }
 
     .footer{
@@ -177,6 +180,11 @@
       font-size: 12.5px;
       color: rgba(255,255,255,.9);
       opacity:.95;
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      align-items:center;
     }
 
     .hidden{ display:none; }
@@ -195,7 +203,7 @@
     .modal.show{ display:flex; }
 
     .modalCard{
-      width:min(520px, 92vw);
+      width:min(560px, 92vw);
       background: rgba(255,255,255,.95);
       border-radius: 22px;
       padding: 18px 18px 16px;
@@ -203,37 +211,23 @@
       border: 1px solid rgba(255,255,255,.4);
       backdrop-filter: blur(10px);
     }
-    .modalCard h2{ margin:8px 0 6px; text-align:center; }
-    .modalCard p{ text-align:center; }
 
     .code{
       margin-top:12px;
-      background: #111827;
+      background: #0b1220;
       color:#e5e7eb;
       border-radius: 14px;
       padding: 12px;
       font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size: 12.5px;
+      font-size: 12.8px;
       line-height:1.35;
       white-space: pre-wrap;
       word-break: break-word;
     }
 
     .modalRow{ display:flex; gap:10px; justify-content:center; margin-top:12px; flex-wrap:wrap; }
-    .btn{
-      padding: 10px 14px;
-      border-radius: 14px;
-      font-weight:800;
-      cursor:pointer;
-      border:0;
-      box-shadow:none;
-    }
-    .btn-dark{ background:#111827; color:#fff; }
-    .btn-ghost{ background: rgba(17,24,39,.08); color:#111827; }
 
-    .shake{
-      animation: shake .35s ease;
-    }
+    .shake{ animation: shake .35s ease; }
     @keyframes shake{
       0%,100%{ transform: translateX(0); }
       20%{ transform: translateX(-6px); }
@@ -242,53 +236,130 @@
       80%{ transform: translateX(4px); }
     }
 
-    .fadeIn{
-      animation: fadeIn .35s ease both;
-    }
+    .fadeIn{ animation: fadeIn .35s ease both; }
     @keyframes fadeIn{
-      from{ opacity:0; transform: translateY(8px) scale(.98); }
+      from{ opacity:0; transform: translateY(8px) scale(.985); }
       to{ opacity:1; transform: translateY(0) scale(1); }
     }
+
+    /* “tap to start” overlay para música */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background: radial-gradient(900px 600px at 50% 25%, rgba(255,255,255,.14), rgba(0,0,0,.28)),
+                  rgba(17,24,39,.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:20;
+      padding:18px;
+    }
+    .overlayCard{
+      width:min(520px, 92vw);
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(255,255,255,.45);
+      border-radius: 22px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.35);
+      padding: 18px 16px 16px;
+      text-align:center;
+      backdrop-filter: blur(10px);
+    }
+    .overlayCard .tiny{ font-size: 12.8px; color: rgba(17,24,39,.65); margin-top:6px; }
+
+    .list{
+      margin: 12px auto 0;
+      max-width: 520px;
+      text-align:left;
+      background: rgba(255,255,255,.65);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      padding: 12px 14px;
+    }
+    .list li{ margin: 6px 0; color: rgba(17,24,39,.78); }
   </style>
 </head>
 <body>
+  <!-- Audio: por regla de navegadores, inicia cuando la persona toca "Empezar" -->
+  <audio id="bgm" preload="auto" loop>
+    <!-- Subir un archivo tuyo/royalty-free al repo con este nombre -->
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <div class="overlay" id="startOverlay">
+    <div class="overlayCard fadeIn">
+      <div style="display:flex; justify-content:center;">
+        <div class="badge">💌 Para <span id="ovName">Massiel</span></div>
+      </div>
+      <h2 id="ovTitle">Volvamos a elegirnos</h2>
+      <p id="ovText">No vengo a prometer perfecto… vengo a elegirte mejor. Con calma, con diálogo y con ganas de construir.</p>
+
+      <ul class="list" id="ovList">
+        <li>Elegirnos incluso cuando toca mejorar.</li>
+        <li>Que el amor también sea proyecto, paz y equipo.</li>
+        <li>Más hechos, menos orgullo.</li>
+      </ul>
+
+      <div class="row" style="margin-top:14px;">
+        <button class="btn-dark" id="startBtn">Empezar con música 🎵</button>
+        <button class="btn-ghost" id="startNoMusic">Empezar sin música</button>
+      </div>
+      <div class="tiny">(Tip: si no suena, sube un archivo llamado <b>music.mp3</b> al repositorio)</div>
+    </div>
+  </div>
+
   <div class="wrap">
     <div class="card fadeIn" id="mainCard">
       <div style="display:flex; justify-content:center;">
-        <div class="badge">💌 <span id="badgeText">Mensaje especial</span></div>
+        <div class="badge">💖 <span id="badgeText">Un mensaje para ti</span></div>
       </div>
 
       <div class="photo" aria-hidden="true"><span>💘</span></div>
 
-      <h1 id="question">¿Quieres ser mi San Valentín? 🥺</h1>
-      <p id="sub">Prometo que este 14 será bonito: risas, detallitos y un montón de cariño ✨</p>
+      <!-- Pantalla reflexiva (antes de la pregunta) -->
+      <div id="screenReflect">
+        <h1 id="reflectTitle">Massiel…</h1>
+        <p id="reflectText">Si me dijiste “vuelve a enamorarme”, yo lo tomé en serio. No con palabras bonitas solamente… sino con detalles, constancia y la decisión de elegirnos cada día.</p>
 
-      <div class="row" id="buttonsRow">
-        <button class="btn-yes" id="yesBtn">Sí, obvio 💖</button>
-        <button class="btn-no" id="noBtn">No 😶</button>
+        <div class="mini" style="margin-top:12px;">
+          <button class="pill" id="continueBtn">Continuar ✨</button>
+          <button class="pill" id="muteBtn">🔊 Música: ON</button>
+        </div>
       </div>
 
-      <div class="mini" id="miniRow">
-        <button class="pill" id="customizeBtn" type="button">✍️ Personalizar</button>
-        <button class="pill" id="shareBtn" type="button">📲 Copiar link</button>
-        <button class="pill" id="musicBtn" type="button">🎵 Idea de música</button>
+      <!-- Pantalla de la pregunta -->
+      <div id="screenQuestion" class="hidden">
+        <h1 id="question">¿Quieres ser mi San Valentín? 🥺</h1>
+        <p id="sub">Prometo que este 14 será bonito: risas, detallitos y un montón de cariño ✨</p>
+
+        <div class="row" id="buttonsRow">
+          <button class="btn-yes" id="yesBtn">Sí, obvio 💖</button>
+          <button class="btn-no" id="noBtn">No 😶</button>
+        </div>
+
+        <div class="mini" id="miniRow">
+          <button class="pill" id="customizeBtn" type="button">✍️ Personalizar</button>
+          <button class="pill" id="shareBtn" type="button">📲 Copiar link</button>
+          <button class="pill" id="musicBtn" type="button">🎵 Idea de música</button>
+        </div>
       </div>
 
-      <div class="footer">Tip: Si lo abres en el cel, se ve más lindo en pantalla completa 😄</div>
+      <div class="footer">
+        <span>Tip: en el cel se ve más lindo en pantalla completa 😄</span>
+      </div>
     </div>
   </div>
 
-  <!-- Modal -->
+  <!-- Modal final -->
   <div class="modal" id="modal">
     <div class="modalCard fadeIn">
       <h2 id="modalTitle">¡Siiii! 😭💖</h2>
-      <p id="modalText">Ya está, queda oficial. Mi San Valentín eres tú ✨</p>
+      <p id="modalText">Ya está… queda oficial. Mi San Valentín eres tú ✨</p>
 
       <div class="code" id="copyBox"></div>
 
       <div class="modalRow">
-        <button class="btn btn-dark" id="copyBtn">Copiar mensaje</button>
-        <button class="btn btn-ghost" id="closeBtn">Cerrar</button>
+        <button class="btn-dark" id="copyBtn">Copiar mensaje</button>
+        <button class="btn-ghost" id="closeBtn">Cerrar</button>
       </div>
     </div>
   </div>
@@ -296,13 +367,42 @@
   <script>
     // ====== PERSONALIZA AQUÍ (fácil) ======
     const CONFIG = {
-      nombreDeElla: "Mi amor",
+      nombreDeElla: "Massiel",
       tuNombre: "",
+
+      // Pantalla inicial (overlay)
+      overlayTitulo: "Volvamos a elegirnos",
+      overlayTexto: "No vengo a prometer perfecto… vengo a elegirte mejor. Con calma, con diálogo y con ganas de construir.",
+      overlayBullets: [
+        "Elegirnos incluso cuando toca mejorar.",
+        "Que el amor también sea proyecto, paz y equipo.",
+        "Más hechos, menos orgullo."
+      ],
+
+      // Pantalla reflexiva (antes de la pregunta)
+      reflexTitulo: "Massiel…",
+      reflexTexto: "Si me dijiste “vuelve a enamorarme”, yo lo tomé en serio. No con palabras bonitas solamente… sino con detalles, constancia y la decisión de elegirnos cada día.",
+
+      // Pregunta
       pregunta: "¿Quieres ser mi San Valentín? 🥺",
       subtexto: "Prometo que este 14 será bonito: risas, detallitos y un montón de cariño ✨",
-      badge: "Mensaje especial",
-      mensajeFinal: "Ya está, queda oficial. Mi San Valentín eres tú ✨",
-      mensajeParaCopiar: "Aceptaste 😭💖\n\nFeliz San Valentín, mi vida.\nTe amo y gracias por elegirnos. 🫶✨",
+      badge: "Un mensaje para ti",
+
+      // Final (modal)
+      mensajeFinal: "Y si a veces nos cuesta, igual: volvemos a elegirnos. 🫶✨",
+      chisteFinal: "(Y por cierto… el botón NO está de adorno 😅)",
+
+      mensajeParaCopiar:
+        "Aceptaste 😭💖
+
+" +
+        "Massiel, gracias por darme la oportunidad de volver a enamorarte.
+" +
+        "Yo también elijo: mejorar, cuidarnos y construir bonito.
+
+" +
+        "¿Plan? Este 14 es nuestro. ✨🫶",
+
       musicaIdeas: [
         "‘Until I Found You’ – Stephen Sanchez",
         "‘Perfect’ – Ed Sheeran",
@@ -313,32 +413,73 @@
     };
 
     // ====== ELEMENTOS ======
+    const startOverlay = document.getElementById('startOverlay');
+    const startBtn = document.getElementById('startBtn');
+    const startNoMusic = document.getElementById('startNoMusic');
+    const bgm = document.getElementById('bgm');
+
+    const ovName = document.getElementById('ovName');
+    const ovTitle = document.getElementById('ovTitle');
+    const ovText = document.getElementById('ovText');
+    const ovList = document.getElementById('ovList');
+
+    const badgeText = document.getElementById('badgeText');
+    const screenReflect = document.getElementById('screenReflect');
+    const reflectTitle = document.getElementById('reflectTitle');
+    const reflectText = document.getElementById('reflectText');
+    const continueBtn = document.getElementById('continueBtn');
+    const muteBtn = document.getElementById('muteBtn');
+
+    const screenQuestion = document.getElementById('screenQuestion');
     const question = document.getElementById('question');
     const sub = document.getElementById('sub');
-    const badgeText = document.getElementById('badgeText');
+
     const yesBtn = document.getElementById('yesBtn');
     const noBtn = document.getElementById('noBtn');
+
     const modal = document.getElementById('modal');
     const modalTitle = document.getElementById('modalTitle');
     const modalText = document.getElementById('modalText');
     const copyBox = document.getElementById('copyBox');
     const copyBtn = document.getElementById('copyBtn');
     const closeBtn = document.getElementById('closeBtn');
+
     const shareBtn = document.getElementById('shareBtn');
     const musicBtn = document.getElementById('musicBtn');
     const customizeBtn = document.getElementById('customizeBtn');
 
-    // ====== INIT ======
+    let musicOn = true;
+
     function applyConfig(){
+      ovName.textContent = CONFIG.nombreDeElla || 'Mi amor';
+      ovTitle.textContent = CONFIG.overlayTitulo;
+      ovText.textContent = CONFIG.overlayTexto;
+      ovList.innerHTML = '';
+      CONFIG.overlayBullets.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        ovList.appendChild(li);
+      });
+
+      badgeText.textContent = CONFIG.badge;
+      reflectTitle.textContent = CONFIG.reflexTitulo;
+      reflectText.textContent = CONFIG.reflexTexto;
+
       question.textContent = CONFIG.pregunta;
       sub.textContent = CONFIG.subtexto;
-      badgeText.textContent = CONFIG.badge;
 
-      // cambia el texto del botón sí con el nombre si quieres
-      if (CONFIG.nombreDeElla && CONFIG.nombreDeElla !== 'Mi amor') {
+      // botón Sí personalizado
+      if (CONFIG.nombreDeElla) {
         yesBtn.textContent = `Sí, ${CONFIG.nombreDeElla} 💖`;
       }
+
+      setMuteButton();
     }
+
+    function setMuteButton(){
+      muteBtn.textContent = musicOn ? '🔊 Música: ON' : '🔇 Música: OFF';
+    }
+
     applyConfig();
 
     // ====== corazones ======
@@ -350,12 +491,51 @@
       h.style.height = size + 'px';
       h.style.left = (Math.random()*100) + 'vw';
       h.style.bottom = '-40px';
-      h.style.opacity = 0.55 + Math.random()*0.4;
-      h.style.animationDuration = (4 + Math.random()*4) + 's';
+      h.style.opacity = 0.55 + Math.random()*0.35;
+      h.style.animationDuration = (4 + Math.random()*4.2) + 's';
       document.body.appendChild(h);
       setTimeout(()=> h.remove(), 9000);
     }
-    setInterval(spawnHeart, 450);
+    setInterval(spawnHeart, 520);
+
+    // ====== overlay start (música) ======
+    async function startExperience(withMusic){
+      musicOn = !!withMusic;
+      setMuteButton();
+      startOverlay.style.display = 'none';
+
+      if (withMusic) {
+        try{
+          bgm.volume = 0.55;
+          await bgm.play();
+        }catch{
+          // Si el navegador bloquea o no encuentra el archivo, seguimos igual.
+          musicOn = false;
+          setMuteButton();
+        }
+      }
+    }
+
+    startBtn.addEventListener('click', () => startExperience(true));
+    startNoMusic.addEventListener('click', () => startExperience(false));
+
+    muteBtn.addEventListener('click', async () => {
+      musicOn = !musicOn;
+      setMuteButton();
+      if (musicOn) {
+        try{ await bgm.play(); } catch{}
+      } else {
+        bgm.pause();
+      }
+    });
+
+    // ====== transición reflexión -> pregunta ======
+    continueBtn.addEventListener('click', () => {
+      screenReflect.classList.add('hidden');
+      screenQuestion.classList.remove('hidden');
+      screenQuestion.classList.add('fadeIn');
+      setTimeout(()=> screenQuestion.classList.remove('fadeIn'), 400);
+    });
 
     // ====== botón NO que se escapa ======
     function moveNoButton(){
@@ -376,20 +556,16 @@
     noBtn.addEventListener('mouseenter', () => {
       noCount++;
       moveNoButton();
-      if (noCount === 3) {
-        noBtn.textContent = '¿Segura? 😳';
-      }
-      if (noCount === 6) {
-        noBtn.textContent = 'Ya pues 😅';
-      }
+      if (noCount === 2) noBtn.textContent = '¿Segura? 😳';
+      if (noCount === 5) noBtn.textContent = 'Ya pues 😅';
+      if (noCount === 8) noBtn.textContent = 'Última… 😭';
     });
 
-    // para celular (toque)
     noBtn.addEventListener('touchstart', (e) => {
       e.preventDefault();
       noCount++;
       moveNoButton();
-      navigator.vibrate?.(20);
+      navigator.vibrate?.(18);
     }, {passive:false});
 
     // ====== botón SÍ ======
@@ -401,8 +577,8 @@
     function showModal(accepted){
       modal.classList.add('show');
       if (accepted) {
-        modalTitle.textContent = `¡Siiii ${CONFIG.nombreDeElla !== 'Mi amor' ? CONFIG.nombreDeElla : ''}! 😭💖`.trim();
-        modalText.textContent = CONFIG.mensajeFinal;
+        modalTitle.textContent = `¡Siiii ${CONFIG.nombreDeElla || ''}! 😭💖`.trim();
+        modalText.textContent = CONFIG.mensajeFinal + " " + CONFIG.chisteFinal;
         copyBox.textContent = CONFIG.mensajeParaCopiar;
       }
     }
@@ -420,7 +596,8 @@
       }catch{
         copyBox.classList.add('shake');
         setTimeout(()=> copyBox.classList.remove('shake'), 400);
-        alert('No pude copiar automáticamente 😅\nCopia manual: mantén presionado el texto.');
+        alert('No pude copiar automáticamente 😅
+Copia manual: mantén presionado el texto.');
       }
     });
 
@@ -436,7 +613,7 @@
       }
     });
 
-    // ====== Música ======
+    // ====== Música idea ======
     musicBtn.addEventListener('click', () => {
       const pick = CONFIG.musicaIdeas[Math.floor(Math.random()*CONFIG.musicaIdeas.length)];
       modal.classList.add('show');
@@ -449,19 +626,24 @@
 
     // ====== Personalizar rápido ======
     customizeBtn.addEventListener('click', () => {
-      const nombre = prompt('¿Cómo le dices? (Ej: Massiel, Amor, Princesa)');
+      const nombre = prompt('¿Cómo le dices? (Ej: Massiel, Amor, Mi vida)', CONFIG.nombreDeElla);
       if (nombre) CONFIG.nombreDeElla = nombre;
+
+      const ref = prompt('Texto reflexivo (opcional)', CONFIG.reflexTexto);
+      if (ref) CONFIG.reflexTexto = ref;
+
       const q = prompt('Pregunta (opcional)', CONFIG.pregunta);
       if (q) CONFIG.pregunta = q;
+
       const s = prompt('Subtexto (opcional)', CONFIG.subtexto);
       if (s) CONFIG.subtexto = s;
+
       applyConfig();
 
-      // mini confirmación
       modal.classList.add('show');
       modalTitle.textContent = '✨ Listo';
       modalText.textContent = 'Ya quedó personalizado. Ahora compártelo 😄';
-      copyBox.textContent = 'Tip: Puedes editar el texto arriba en CONFIG para dejarlo perfectito.';
+      copyBox.textContent = 'Tip: Si quieres música, sube un archivo llamado music.mp3 al repo (misma carpeta que index.html).';
     });
 
     // ====== Confetti simple ======
@@ -494,11 +676,6 @@
         setTimeout(()=> dot.remove(), 1800);
       }
     }
-
-    // ====== Fullscreen hint (opcional) ======
-    // Si quieres forzar pedir pantalla completa al abrir, descomenta esto:
-    // window.addEventListener('click', () => document.documentElement.requestFullscreen?.(), { once:true });
-
   </script>
 </body>
 </html>

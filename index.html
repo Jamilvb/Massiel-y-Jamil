@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Massiel ✨ Mi mundo eres tú</title>
-  <meta name="description" content="Una web especial para Massiel: elegirnos, mejorar y amar bonito." />
+  <meta name="description" content="Historia para Massiel: elegirnos, mejorar y amar bonito." />
 
   <style>
     :root{
@@ -39,6 +39,7 @@
       pointer-events:none;
       opacity:.55;
       filter: drop-shadow(0 6px 10px rgba(0,0,0,.12));
+      z-index: 1;
     }
     .heart{
       position:absolute;
@@ -57,7 +58,6 @@
     .heart:before{ left:-9px; top:0; }
     .heart:after{ left:0; top:-9px; }
     .heart{ background: rgba(255,255,255,.65); }
-
     @keyframes floatUp{
       from{ transform: translateY(30px) rotate(45deg); }
       to{ transform: translateY(-110vh) rotate(45deg); }
@@ -69,6 +69,8 @@
       align-items:center;
       justify-content:center;
       padding:28px 14px;
+      position: relative;
+      z-index: 2;
     }
 
     .card{
@@ -89,7 +91,6 @@
       gap:10px;
       flex-wrap:wrap;
     }
-
     .badge{
       display:inline-flex;
       align-items:center;
@@ -100,17 +101,14 @@
       border:1px solid rgba(255,46,134,.25);
       color: #a10d52;
       font-weight:700;
-      letter-spacing:.2px;
       user-select:none;
     }
-
     .tools{
       display:flex;
       gap:10px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
-
     .toolBtn{
       appearance:none;
       border:1px solid rgba(122,60,255,.22);
@@ -123,7 +121,6 @@
       transition: transform .12s ease, background .12s ease, border-color .12s ease;
     }
     .toolBtn:hover{ transform: translateY(-1px); background: rgba(122,60,255,.14); }
-    .toolBtn:active{ transform: translateY(0); }
 
     .hero{
       display:grid;
@@ -135,13 +132,11 @@
     @media (max-width: 860px){
       .hero{ grid-template-columns:1fr; }
     }
-
     .title{
       font-size: clamp(28px, 4.2vw, 46px);
       margin: 14px 0 8px;
       line-height:1.05;
     }
-
     .subtitle{
       margin:0;
       color:var(--muted);
@@ -183,14 +178,6 @@
       position:relative;
       overflow:hidden;
     }
-    .side:before{
-      content:"";
-      position:absolute;
-      inset:-40px -40px auto auto;
-      width:140px; height:140px;
-      background: radial-gradient(circle, rgba(255,46,134,.35), transparent 60%);
-      transform: rotate(20deg);
-    }
     .side h3{
       margin:0 0 8px;
       font-size:18px;
@@ -210,7 +197,6 @@
       margin-top:18px;
       align-items:center;
     }
-
     .btn{
       appearance:none;
       border:none;
@@ -226,29 +212,18 @@
       color:white;
       box-shadow: 0 12px 24px rgba(24,178,107,.22);
     }
-    .btnPrimary:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-    .btnPrimary:active{ transform: translateY(0); }
-
+    .btnPrimary:hover{ transform: translateY(-1px); }
     .btnSoft{
       background: rgba(255,46,134,.10);
       border: 1px solid rgba(255,46,134,.25);
       color:#8a1247;
       font-weight:900;
     }
-    .btnSoft:hover{ transform: translateY(-1px); box-shadow: var(--ring); }
-    .btnSoft:active{ transform: translateY(0); }
-
     .btnGhost{
       background: rgba(0,0,0,.04);
       border: 1px solid rgba(0,0,0,.08);
       color:#30304a;
       font-weight:800;
-    }
-
-    .hint{
-      margin-top:10px;
-      font-size:12.5px;
-      color: rgba(0,0,0,.45);
     }
 
     .divider{
@@ -283,75 +258,144 @@
       font-size:14px;
     }
 
-    /* Modal */
-    .modal{
-      position:fixed;
-      inset:0;
-      display:none;
-      align-items:center;
-      justify-content:center;
-      padding:18px;
-      background: rgba(0,0,0,.45);
-      z-index:99;
+    /* ===== STORY OVERLAY ===== */
+    .storyOverlay{
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0,0,0,.50);
     }
-    .modal.show{ display:flex; }
-    .modalCard{
-      width:min(620px, 100%);
-      background: white;
-      border-radius: 22px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.25);
-      padding:18px 18px 16px;
-      position:relative;
-      overflow:hidden;
+    .storyCard{
+      width: min(760px, 100%);
+      background: rgba(255,255,255,.96);
+      border-radius: 24px;
+      box-shadow: 0 24px 80px rgba(0,0,0,.35);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.55);
     }
-    .modalCard:before{
-      content:"";
-      position:absolute;
-      inset:-30px auto auto -30px;
-      width:160px; height:160px;
-      background: radial-gradient(circle, rgba(122,60,255,.18), transparent 65%);
-    }
-    .modalHeader{
+    .storyTop{
       display:flex;
-      align-items:flex-start;
+      align-items:center;
       justify-content:space-between;
       gap:10px;
+      padding: 12px 14px;
+      background: linear-gradient(90deg, rgba(255,94,168,.16), rgba(122,60,255,.12));
+      border-bottom: 1px solid rgba(0,0,0,.06);
     }
-    .modalTitle{
-      margin:0;
-      font-size:18px;
-      color:#1d1d2a;
+    .storyTitle{
+      font-weight: 900;
+      color: #2a1f55;
+      font-size: 14px;
+      white-space:nowrap;
     }
-    .closeBtn{
-      border:none;
-      background: rgba(0,0,0,.06);
-      width:36px; height:36px;
-      border-radius: 12px;
-      cursor:pointer;
-      font-weight:900;
-    }
-    .modalBody{
-      margin-top:10px;
-      color:#3c3c55;
-      line-height:1.6;
-      font-size:14.5px;
-      white-space:pre-line;
-    }
-    .modalActions{
-      margin-top:14px;
+    .progress{
       display:flex;
-      gap:10px;
+      gap:6px;
+      flex: 1;
       justify-content:flex-end;
       flex-wrap:wrap;
     }
+    .bar{
+      width: 18px;
+      height: 6px;
+      border-radius: 99px;
+      background: rgba(0,0,0,.12);
+      overflow:hidden;
+    }
+    .bar > span{
+      display:block;
+      height:100%;
+      width:0%;
+      background: linear-gradient(90deg, var(--primary), var(--primary2));
+      border-radius: 99px;
+    }
 
-    /* Confetti simple */
+    .storyBody{
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .storyMedia{
+      width:100%;
+      height: min(420px, 56vh);
+      border-radius: 18px;
+      background: linear-gradient(135deg, rgba(255,94,168,.28), rgba(122,60,255,.22));
+      border: 1px solid rgba(0,0,0,.06);
+      overflow:hidden;
+      position:relative;
+    }
+    .storyMedia img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      transform: scale(1.01);
+      opacity: 0;
+      transition: opacity .25s ease;
+    }
+    .storyMedia img.show{ opacity: 1; }
+
+    .storyText{
+      background: rgba(255,255,255,.85);
+      border:1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      padding: 12px 12px;
+      color: #2b2b45;
+      line-height:1.6;
+      font-size: 15px;
+      white-space: pre-line;
+    }
+
+    .storyActions{
+      display:flex;
+      gap:10px;
+      justify-content:space-between;
+      align-items:center;
+      padding: 12px 14px 16px;
+      border-top: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.9);
+    }
+    .navBtn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      font-weight: 900;
+      padding: 12px 14px;
+      border-radius: 16px;
+      transition: transform .12s ease;
+      user-select:none;
+    }
+    .navBtn:active{ transform: translateY(1px); }
+
+    .prevBtn{
+      background: rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.10);
+      color:#2f2f44;
+    }
+    .nextBtn{
+      background: linear-gradient(135deg, var(--primary), var(--primary2));
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(255,46,134,.18);
+    }
+    .skipBtn{
+      background: rgba(24,178,107,.10);
+      border:1px solid rgba(24,178,107,.25);
+      color:#0f6b41;
+    }
+
+    /* Confetti */
     .confetti{
       position: fixed;
       inset:0;
       pointer-events:none;
       overflow:hidden;
-      z-index:120;
+      z-index:1200;
     }
     .confetti i{
       position:absolute;
@@ -369,17 +413,43 @@
 </head>
 
 <body>
-  <!-- Corazones -->
   <div class="hearts" aria-hidden="true" id="hearts"></div>
 
-  <div class="wrap">
+  <!-- STORY OVERLAY -->
+  <div class="storyOverlay" id="story">
+    <div class="storyCard">
+      <div class="storyTop">
+        <div class="storyTitle" id="storyTitle">💗 Massiel… esto es para ti</div>
+        <div class="progress" id="progress"></div>
+      </div>
+
+      <div class="storyBody">
+        <div class="storyMedia" id="storyMedia">
+          <img id="storyImg" alt="Foto" />
+        </div>
+        <div class="storyText" id="storyText"></div>
+      </div>
+
+      <div class="storyActions">
+        <button class="navBtn prevBtn" id="prevBtn" type="button">⬅ Atrás</button>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;">
+          <button class="navBtn skipBtn" id="skipBtn" type="button">Saltar</button>
+          <button class="navBtn nextBtn" id="nextBtn" type="button">Siguiente ➜</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE -->
+  <div class="wrap" id="mainWrap" style="display:none;">
     <main class="card">
       <div class="topRow">
         <div class="badge">💗 Mensaje especial</div>
         <div class="tools">
           <button class="toolBtn" id="musicBtn" type="button">🔊 Música: OFF</button>
           <button class="toolBtn" id="copyBtn" type="button">📋 Copiar link</button>
-          <button class="toolBtn" id="msgBtn" type="button">💌 Leer mensaje</button>
+          <button class="toolBtn" id="readBtn" type="button">💌 Leer mensaje</button>
         </div>
       </div>
 
@@ -387,8 +457,8 @@
         <div>
           <h1 class="title">Massiel… <br>mi mundo eres tú ✨</h1>
           <p class="subtitle">
-            Esta página no es para hablar del pasado, es para decirte algo claro:
-            <strong>yo te elijo</strong>. Con más tiempo, más presencia y con un amor que se construye bonito.
+            Esta página es una promesa bonita:
+            <strong>elegirte con acciones</strong>. Con más tiempo, más presencia y con amor del bueno.
           </p>
 
           <div class="callout">
@@ -404,13 +474,9 @@
           </div>
 
           <div class="btnRow">
-            <button class="btn btnPrimary" id="yesBtn" type="button">Sí, yo también 💚</button>
-            <button class="btn btnSoft" id="softBtn" type="button">Abracito primero 🤍</button>
+            <button class="btn btnPrimary" id="yesBtn" type="button">Sí, acepto 💚</button>
+            <button class="btn btnSoft" id="hugBtn" type="button">Abracito primero 🤍</button>
             <button class="btn btnGhost" id="pauseBtn" type="button">⏸ Pausar música</button>
-          </div>
-
-          <div class="hint">
-            Tip: en celular, la música empieza cuando tocas un botón (por seguridad del navegador).
           </div>
         </div>
 
@@ -419,7 +485,7 @@
           <ul class="list">
             <li>Nuestro primer viaje… y mi corazón al límite por tenerte a mi lado.</li>
             <li>Parque de las Leyendas, playa, parques de agua, Costa Verde…</li>
-            <li>Y una frase que se me quedó para siempre: <strong>“mi mundo eres tú”</strong>.</li>
+            <li>Una frase que se me quedó para siempre: <strong>“mi mundo eres tú”</strong>.</li>
           </ul>
 
           <div class="divider"></div>
@@ -438,55 +504,33 @@
 
       <section class="grid2">
         <div class="box">
-          <h4>Lo que siento</h4>
+          <h4>Lo que quiero que sientas</h4>
           <p>
-            No es solo un “te amo”. Es un “me quedo”, un “te escucho”, un “yo puedo”.
-            Quiero que te sientas segura conmigo… en lo simple y en lo grande.
+            Paz. Seguridad. Un amor claro.
+            No solo palabras… acciones que te abracen.
           </p>
         </div>
 
         <div class="box">
-          <h4>Lo que elijo hacer</h4>
+          <h4>La pregunta final 💘</h4>
           <p>
-            Elegirte con acciones. Ser constante. Ser claro.
-            Que mi amor no sea discurso: que sea presencia.
+            Massiel… ¿quieres ser mi San Valentín?
           </p>
         </div>
       </section>
     </main>
   </div>
 
-  <!-- Audio (cambia la ruta si lo pusiste en otra carpeta) -->
+  <!-- Audio -->
   <audio id="bgm" src="massiel-mi-vida.mp3" preload="auto" loop></audio>
-
-  <!-- Modal -->
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-    <div class="modalCard">
-      <div class="modalHeader">
-        <h2 class="modalTitle" id="modalTitle">💌 Para ti, Massiel</h2>
-        <button class="closeBtn" id="closeModal" type="button">✕</button>
-      </div>
-      <div class="modalBody" id="modalBody"></div>
-      <div class="modalActions">
-        <button class="btn btnSoft" id="copyMsgBtn" type="button">Copiar mensaje</button>
-        <button class="btn btnPrimary" id="okModal" type="button">Me gustó 🤍</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Confetti -->
   <div class="confetti" id="confetti" aria-hidden="true"></div>
 
   <script>
-    // ---------- Helpers ----------
-    const $ = (id) => document.getElementById(id);
-
-    // ---------- Hearts background ----------
+    // Hearts
     (function buildHearts(){
-      const container = $("hearts");
+      const container = document.getElementById("hearts");
       const count = 22;
       const rand = (min,max) => Math.random()*(max-min)+min;
-
       for(let i=0;i<count;i++){
         const h = document.createElement("div");
         h.className = "heart";
@@ -500,117 +544,164 @@
       }
     })();
 
-    // ---------- Audio controls ----------
-    const audio = $("bgm");
+    // Audio controls
+    const audio = document.getElementById("bgm");
     audio.volume = 0.65;
-
     let musicOn = false;
 
     async function tryPlay(){
       try{
         await audio.play();
         musicOn = true;
-        $("musicBtn").textContent = "🔊 Música: ON";
+        const btn = document.getElementById("musicBtn");
+        if(btn) btn.textContent = "🔊 Música: ON";
         return true;
       }catch(e){
-        // Autoplay bloqueado hasta interacción
         return false;
       }
     }
-
     function pauseMusic(){
       audio.pause();
       musicOn = false;
-      $("musicBtn").textContent = "🔊 Música: OFF";
+      const btn = document.getElementById("musicBtn");
+      if(btn) btn.textContent = "🔊 Música: OFF";
     }
 
-    $("musicBtn").addEventListener("click", async () => {
-      if(musicOn) pauseMusic();
-      else await tryPlay();
-    });
+    // STORY SLIDES (rutas EXACTAS a tus archivos)
+    const slides = [
+      { img:"fotos01.jpg.jpeg", text:"Massiel… mi vida.\nAntes de todo, solo quiero que lo sepas:\nYO TE ELIJO. 💗" },
+      { img:"fotos02.jpg.jpeg", text:"Me encanta mirarnos así…\ncomo si el mundo se apagara y solo quedáramos tú y yo." },
+      { img:"fotos03.jpg.jpeg", text:"A veces el amor no se trata de ser perfectos…\nsino de aprender a querernos mejor." },
+      { img:"fotos04.jpg.jpeg", text:"Yo quiero demostrarte con hechos:\nMás tiempo.\nMás presencia.\nMás paz para tu corazón." },
+      { img:"fotos05.jpg.jpeg", text:"05/02/2024 — Lima 💫\nEse viaje… mi corazón al límite por tenerte conmigo.\nY pensé: “mi mundo eres tú”." },
+      { img:"fotos06.jpg.jpeg", text:"Si aparecen dificultades…\nque lo nuestro sea escuchar y entender.\nSin orgullo. Con amor." },
+      { img:"fotos07.jpg.jpeg", text:"Quiero que en los baches\nseamos equipo.\nQue nos elijamos con paciencia." },
+      { img:"fotos08.jpg.jpeg", text:"El amor bonito se nota en lo simple:\nUn abrazo a tiempo.\nUna llamada.\nUna presencia real." },
+      { img:"fotos09.jpg.jpeg", text:"Un día miraremos atrás y diremos:\nSí pudimos.\nSí supimos entendernos.\nSí supimos salir adelante." },
+      { img:"fotos10.jpg.jpeg", text:"Y si me das la mano…\nte prometo algo simple:\nCuidarte con amor… y elegirnos para siempre.\n\nMassiel… ¿quieres ser mi San Valentín? 💘" },
+    ];
 
-    $("pauseBtn").addEventListener("click", () => {
-      pauseMusic();
-    });
+    // STORY PLAYER
+    const story = document.getElementById("story");
+    const mainWrap = document.getElementById("mainWrap");
+    const storyImg = document.getElementById("storyImg");
+    const storyText = document.getElementById("storyText");
+    const progress = document.getElementById("progress");
+    const prevBtn = document.getElementById("prevBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const skipBtn = document.getElementById("skipBtn");
 
-    // Activa música con el primer toque/clic (fallback)
-    function unlockOnce(){
+    let idx = 0;
+
+    function buildProgress(){
+      progress.innerHTML = "";
+      for(let i=0;i<slides.length;i++){
+        const b = document.createElement("div");
+        b.className = "bar";
+        const s = document.createElement("span");
+        s.style.width = (i < idx ? "100%" : (i === idx ? "55%" : "0%"));
+        b.appendChild(s);
+        progress.appendChild(b);
+      }
+    }
+
+    function setImage(src){
+      storyImg.classList.remove("show");
+      storyImg.src = src;
+      storyImg.onload = () => storyImg.classList.add("show");
+      storyImg.onerror = () => {
+        storyImg.classList.add("show");
+        storyText.textContent = "⚠️ No cargó una foto.\nRevisa el nombre del archivo en GitHub.\n\nSe intentó cargar:\n" + src + "\n\n(igual puedes seguir)";
+      };
+    }
+
+    function render(){
+      const slide = slides[idx];
+      buildProgress();
+      setImage(slide.img);
+      storyText.textContent = slide.text;
+
+      prevBtn.disabled = idx === 0;
+      prevBtn.style.opacity = idx === 0 ? ".55" : "1";
+
+      nextBtn.textContent = (idx === slides.length - 1) ? "Finalizar ✨" : "Siguiente ➜";
+    }
+
+    function finishStory(){
+      story.style.display = "none";
+      mainWrap.style.display = "flex";
+      // Como ya hubo clic, el navegador permite reproducir
       tryPlay();
-      window.removeEventListener("click", unlockOnce);
-      window.removeEventListener("touchstart", unlockOnce);
     }
-    window.addEventListener("click", unlockOnce, { once:true });
-    window.addEventListener("touchstart", unlockOnce, { once:true });
 
-    // ---------- Copy link ----------
-    $("copyBtn").addEventListener("click", async () => {
-      const link = window.location.href;
-      try{
-        await navigator.clipboard.writeText(link);
-        toast("✅ Link copiado");
-      }catch{
-        toast("Copia manual: " + link);
+    prevBtn.addEventListener("click", () => { if(idx > 0){ idx--; render(); } });
+    nextBtn.addEventListener("click", () => {
+      if(idx < slides.length - 1){
+        idx++; render();
+      }else{
+        confettiPop();
+        finishStory();
       }
     });
+    skipBtn.addEventListener("click", finishStory);
 
-    // ---------- Modal message ----------
-    const messageText =
-`Massiel, mi vida…
+    // MAIN BUTTONS
+    const musicBtn = document.getElementById("musicBtn");
+    const copyBtn  = document.getElementById("copyBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
+    const yesBtn   = document.getElementById("yesBtn");
+    const hugBtn   = document.getElementById("hugBtn");
+    const readBtn  = document.getElementById("readBtn");
 
-No vengo a hablar de lo malo, vengo a hablar de lo que elijo:
-yo te elijo. Con más tiempo, más presencia y un amor bonito.
+    if(musicBtn){
+      musicBtn.addEventListener("click", async () => {
+        if(musicOn) pauseMusic();
+        else await tryPlay();
+      });
+    }
+    if(pauseBtn) pauseBtn.addEventListener("click", pauseMusic);
 
-Quiero que te sientas cuidada en lo cotidiano.
-Que mi amor se note en mis hechos: escucharte, respetarte y quedarme.
+    if(copyBtn){
+      copyBtn.addEventListener("click", async () => {
+        const link = window.location.href;
+        try{
+          await navigator.clipboard.writeText(link);
+          toast("✅ Link copiado");
+        }catch{
+          toast("Copia manual: " + link);
+        }
+      });
+    }
 
-Me acuerdo de nuestro viaje a Lima (05/02/2024)…
-y esa idea se me quedó para siempre: mi mundo eres tú.
+    if(readBtn){
+      readBtn.addEventListener("click", () => {
+        alert("Massiel… mi vida.\n\nYo te elijo con acciones.\nMás tiempo, más presencia y un amor bonito.\n\nY si me das la mano…\nte prometo algo simple:\nCuidarte con amor… y elegirnos para siempre.");
+      });
+    }
 
-Y si me das la mano… te prometo algo simple:
-cuidarte con amor… y elegirnos para siempre.`;
+    if(hugBtn){
+      hugBtn.addEventListener("click", async () => {
+        await tryPlay();
+        toast("🤍 Abracito enviado");
+      });
+    }
 
-    $("msgBtn").addEventListener("click", () => {
-      $("modalBody").textContent = messageText;
-      $("modal").classList.add("show");
-    });
-    $("closeModal").addEventListener("click", () => $("modal").classList.remove("show"));
-    $("okModal").addEventListener("click", () => $("modal").classList.remove("show"));
-    $("modal").addEventListener("click", (e) => {
-      if(e.target === $("modal")) $("modal").classList.remove("show");
-    });
+    if(yesBtn){
+      yesBtn.addEventListener("click", async () => {
+        await tryPlay();
+        confettiPop();
+        toast("💘 ¡Qué lindo! 💚");
+      });
+    }
 
-    $("copyMsgBtn").addEventListener("click", async () => {
-      try{
-        await navigator.clipboard.writeText(messageText);
-        toast("✅ Mensaje copiado");
-      }catch{
-        toast("No se pudo copiar :(");
-      }
-    });
-
-    // ---------- Main buttons ----------
-    $("softBtn").addEventListener("click", async () => {
-      await tryPlay();
-      $("modalBody").textContent = "Gracias por estar aquí 🤍\n\nSi hoy necesitas paz, yo te la doy.\nSi hoy necesitas tiempo, yo te lo doy.\nY si hoy solo quieres un abrazo… yo me quedo.";
-      $("modal").classList.add("show");
-    });
-
-    $("yesBtn").addEventListener("click", async () => {
-      await tryPlay();
-      confettiPop();
-      $("modalBody").textContent =
-"Yo también… 🥺🤍\n\nGracias por elegirnos.\nTe prometo un amor con presencia,\ncon calma, con paciencia…\nuno que se construye bonito.\n\nMassiel, mi mundo eres tú.";
-      $("modal").classList.add("show");
-    });
-
-    // ---------- Confetti ----------
+    // Confetti
     function confettiPop(){
-      const holder = $("confetti");
+      const holder = document.getElementById("confetti");
       holder.innerHTML = "";
       const colors = ["#ffffff","#ffe0f0","#ffd166","#c8b6ff","#bde0fe","#ff5ea8"];
       const rand = (min,max) => Math.random()*(max-min)+min;
 
-      for(let i=0;i<80;i++){
+      for(let i=0;i<90;i++){
         const p = document.createElement("i");
         p.style.left = rand(0,100) + "vw";
         p.style.background = colors[Math.floor(Math.random()*colors.length)];
@@ -620,11 +711,10 @@ cuidarte con amor… y elegirnos para siempre.`;
         p.style.height = rand(10,18) + "px";
         holder.appendChild(p);
       }
-      // limpia luego
       setTimeout(()=> holder.innerHTML="", 2600);
     }
 
-    // ---------- Small toast ----------
+    // Toast
     let toastTimer = null;
     function toast(text){
       let el = document.getElementById("toast");
@@ -641,7 +731,7 @@ cuidarte con amor… y elegirnos para siempre.`;
         el.style.borderRadius="999px";
         el.style.fontWeight="800";
         el.style.fontSize="13px";
-        el.style.zIndex="200";
+        el.style.zIndex="2000";
         el.style.boxShadow="0 10px 25px rgba(0,0,0,.22)";
         document.body.appendChild(el);
       }
@@ -650,6 +740,9 @@ cuidarte con amor… y elegirnos para siempre.`;
       clearTimeout(toastTimer);
       toastTimer = setTimeout(()=> el.style.opacity="0", 1400);
     }
+
+    // Start
+    render();
   </script>
 </body>
 </html>

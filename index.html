@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Massiel... ✨ Mi mundo eres tú</title>
-  <meta name="description" content="Historia para Massiel: elegirnos, apoyarnos y construir un amor bonito." />
+  <meta name="description" content="Historia para Massiel: elegirnos, mejorar y amar bonito." />
 
   <style>
     :root{
@@ -74,7 +74,7 @@
     }
 
     .card{
-      width:min(920px, 100%);
+      width:min(940px, 100%);
       background:var(--card);
       border-radius:var(--radius);
       box-shadow:var(--shadow);
@@ -153,56 +153,6 @@
     }
     .callout strong{ color:#2a1f55; }
 
-    /* ===== CONTADOR ===== */
-    .counterCard{
-      margin-top:14px;
-      border-radius: 20px;
-      padding: 14px 14px;
-      border: 1px solid rgba(122,60,255,.16);
-      background: linear-gradient(135deg, rgba(255,94,168,.14), rgba(122,60,255,.10));
-      position: relative;
-      overflow:hidden;
-    }
-    .counterTitle{
-      margin:0 0 10px;
-      font-weight: 900;
-      color:#2a1f55;
-      font-size: 14px;
-      display:flex;
-      align-items:center;
-      gap:8px;
-      flex-wrap:wrap;
-    }
-    .counterGrid{
-      display:grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap:10px;
-    }
-    @media (max-width: 520px){
-      .counterGrid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .counterGrid .unit:last-child{ grid-column: span 2; }
-    }
-    .unit{
-      background: rgba(255,255,255,.78);
-      border: 1px solid rgba(0,0,0,.06);
-      border-radius: 16px;
-      padding: 10px 10px;
-      text-align:center;
-    }
-    .unit .num{
-      font-weight: 1000;
-      font-size: 22px;
-      letter-spacing: .5px;
-      color:#1f1745;
-      line-height:1.1;
-    }
-    .unit .lbl{
-      margin-top:4px;
-      font-size: 12px;
-      color: var(--muted);
-      font-weight: 800;
-    }
-
     .pillRow{
       display:flex;
       flex-wrap:wrap;
@@ -218,26 +168,6 @@
       font-weight:700;
       font-size: 13px;
       user-select:none;
-    }
-
-    .side{
-      background: rgba(122,60,255,.08);
-      border:1px solid rgba(122,60,255,.14);
-      border-radius: 22px;
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .side h3{
-      margin:0 0 8px;
-      font-size:18px;
-    }
-    .list{
-      margin:0;
-      padding-left:18px;
-      color:var(--muted);
-      line-height:1.55;
-      font-size:14px;
     }
 
     .btnRow{
@@ -276,10 +206,77 @@
       font-weight:800;
     }
 
+    .side{
+      background: rgba(122,60,255,.08);
+      border:1px solid rgba(122,60,255,.14);
+      border-radius: 22px;
+      padding:18px;
+      position:relative;
+      overflow:hidden;
+    }
+    .side h3{
+      margin:0 0 8px;
+      font-size:18px;
+    }
+    .list{
+      margin:0;
+      padding-left:18px;
+      color:var(--muted);
+      line-height:1.55;
+      font-size:14px;
+    }
+
     .divider{
       height:1px;
       background: rgba(0,0,0,.07);
       margin:18px 0;
+    }
+
+    /* contador */
+    .counterBox{
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: 18px;
+      padding: 14px;
+      margin-top: 14px;
+    }
+    .counterTitle{
+      font-weight:900;
+      color:#2a1f55;
+      margin:0 0 10px;
+      font-size:15px;
+      display:flex;
+      gap:8px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+    .counterGrid{
+      display:grid;
+      grid-template-columns: repeat(5, minmax(0,1fr));
+      gap:10px;
+    }
+    @media (max-width: 520px){
+      .counterGrid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+    }
+    .counterChip{
+      background: rgba(255,46,134,.08);
+      border:1px solid rgba(255,46,134,.18);
+      border-radius: 16px;
+      padding:10px 10px;
+      text-align:center;
+    }
+    .counterNum{
+      font-weight:950;
+      font-size: 20px;
+      color:#7c1344;
+      line-height:1.1;
+    }
+    .counterLbl{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:2px;
+      font-weight:800;
+      letter-spacing:.2px;
     }
 
     .grid2{
@@ -308,7 +305,7 @@
       font-size:14px;
     }
 
-    /* ===== STORY OVERLAY ===== */
+    /* ===== STORY OVERLAY (sin saltar) ===== */
     .storyOverlay{
       position: fixed;
       inset: 0;
@@ -320,7 +317,7 @@
       background: rgba(0,0,0,.50);
     }
     .storyCard{
-      width: min(760px, 100%);
+      width: min(780px, 100%);
       background: rgba(255,255,255,.96);
       border-radius: 24px;
       box-shadow: 0 24px 80px rgba(0,0,0,.35);
@@ -373,26 +370,30 @@
 
     .storyMedia{
       width:100%;
-      height: min(420px, 56vh);
+      height: min(440px, 56vh);
       border-radius: 18px;
       background: linear-gradient(135deg, rgba(255,94,168,.28), rgba(122,60,255,.22));
       border: 1px solid rgba(0,0,0,.06);
       overflow:hidden;
       position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
     }
+    /* ✅ para que NO se recorte: CONTAIN */
     .storyMedia img{
       width:100%;
       height:100%;
-      object-fit: cover;
+      object-fit: contain;
       display:block;
-      transform: scale(1.01);
       opacity: 0;
       transition: opacity .25s ease;
+      background: rgba(255,255,255,.35);
     }
     .storyMedia img.show{ opacity: 1; }
 
     .storyText{
-      background: rgba(255,255,255,.85);
+      background: rgba(255,255,255,.88);
       border:1px solid rgba(0,0,0,.06);
       border-radius: 18px;
       padding: 12px 12px;
@@ -418,10 +419,11 @@
       font-weight: 900;
       padding: 12px 14px;
       border-radius: 16px;
-      transition: transform .12s ease, opacity .12s ease;
+      transition: transform .12s ease, filter .12s ease;
       user-select:none;
     }
     .navBtn:active{ transform: translateY(1px); }
+    .navBtn:disabled{ cursor:not-allowed; filter: grayscale(.2); }
 
     .prevBtn{
       background: rgba(0,0,0,.06);
@@ -432,6 +434,73 @@
       background: linear-gradient(135deg, var(--primary), var(--primary2));
       color: #fff;
       box-shadow: 0 12px 24px rgba(255,46,134,.18);
+    }
+
+    /* ===== MODAL LETRA ===== */
+    .modal{
+      position: fixed;
+      inset:0;
+      z-index: 1500;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      background: rgba(0,0,0,.55);
+    }
+    .modalCard{
+      width:min(860px, 100%);
+      background: rgba(255,255,255,.96);
+      border-radius: 22px;
+      border: 1px solid rgba(255,255,255,.55);
+      box-shadow: 0 26px 90px rgba(0,0,0,.38);
+      overflow:hidden;
+    }
+    .modalTop{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      background: linear-gradient(90deg, rgba(255,94,168,.16), rgba(122,60,255,.12));
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .modalTop h3{
+      margin:0;
+      font-size:14px;
+      color:#2a1f55;
+      font-weight:950;
+    }
+    .closeBtn{
+      appearance:none;
+      border:none;
+      cursor:pointer;
+      font-weight:950;
+      padding:10px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.06);
+      border: 1px solid rgba(0,0,0,.10);
+      color:#2f2f44;
+    }
+    .modalBody{
+      padding:14px;
+    }
+    .lyricsBox{
+      background: rgba(255,255,255,.88);
+      border:1px solid rgba(0,0,0,.07);
+      border-radius: 18px;
+      padding: 14px;
+      color:#2b2b45;
+      line-height:1.65;
+      white-space: pre-line;
+      font-size: 14px;
+      max-height: min(62vh, 520px);
+      overflow:auto;
+    }
+    .lyricsHint{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height:1.4;
     }
 
     /* Confetti */
@@ -460,7 +529,7 @@
 <body>
   <div class="hearts" aria-hidden="true" id="hearts"></div>
 
-  <!-- STORY OVERLAY -->
+  <!-- STORY OVERLAY (SIN SALTAR) -->
   <div class="storyOverlay" id="story">
     <div class="storyCard">
       <div class="storyTop">
@@ -484,6 +553,20 @@
     </div>
   </div>
 
+  <!-- MODAL LETRA -->
+  <div class="modal" id="lyricsModal" aria-hidden="true">
+    <div class="modalCard" role="dialog" aria-modal="true" aria-labelledby="lyricsTitle">
+      <div class="modalTop">
+        <h3 id="lyricsTitle">🎶 La letra — “Volver a elegirnos”</h3>
+        <button class="closeBtn" id="closeLyrics" type="button">✖ Cerrar</button>
+      </div>
+      <div class="modalBody">
+        <div class="lyricsBox" id="lyricsBox"></div>
+        <p class="lyricsHint">💗 Esta canción la hicimos con intención bonita: cuidarnos, elegirnos y construir un “nosotros” con paz.</p>
+      </div>
+    </div>
+  </div>
+
   <!-- MAIN PAGE -->
   <div class="wrap" id="mainWrap" style="display:none;">
     <main class="card">
@@ -492,7 +575,7 @@
         <div class="tools">
           <button class="toolBtn" id="musicBtn" type="button">🔊 Música: OFF</button>
           <button class="toolBtn" id="copyBtn" type="button">📋 Copiar link</button>
-          <button class="toolBtn" id="readBtn" type="button">💌 Leer mensaje</button>
+          <button class="toolBtn" id="lyricsBtn" type="button">🎶 Ver letra</button>
         </div>
       </div>
 
@@ -501,46 +584,20 @@
           <h1 class="title">Massiel… <br>mi mundo eres tú ✨</h1>
 
           <p class="subtitle">
-            Esta página es una promesa bonita:
-            <strong>elegirte con acciones</strong>. Con más tiempo, más presencia y con amor del bueno.
+            Esta página no es para culpas ni indirectas…
+            es para mirarnos con cariño y decirnos la verdad:
+            <strong>te elijo</strong>, y quiero que lo sientas en acciones.
           </p>
 
           <div class="callout">
-            <strong>Promesa simple:</strong> caminar contigo, apoyarnos y cuidarnos.  
-            Que lo nuestro se note en lo cotidiano: escucharte, respetarte, animarte… y quedarme.
-          </div>
-
-          <!-- CONTADOR -->
-          <div class="counterCard" aria-label="Contador de amor">
-            <p class="counterTitle">⏳💗 Mi amor por ti comenzó el <strong>29 de junio del 2023</strong>… y sigue creciendo</p>
-            <div class="counterGrid">
-              <div class="unit">
-                <div class="num" id="cYears">0</div>
-                <div class="lbl">años</div>
-              </div>
-              <div class="unit">
-                <div class="num" id="cDays">0</div>
-                <div class="lbl">días</div>
-              </div>
-              <div class="unit">
-                <div class="num" id="cHours">00</div>
-                <div class="lbl">horas</div>
-              </div>
-              <div class="unit">
-                <div class="num" id="cMins">00</div>
-                <div class="lbl">minutos</div>
-              </div>
-              <div class="unit">
-                <div class="num" id="cSecs">00</div>
-                <div class="lbl">segundos</div>
-              </div>
-            </div>
+            <strong>Promesa bonita:</strong> caminar contigo con más presencia, más calma y más firmeza.
+            Que el amor se note en lo simple: escucharte, cuidarte, respetarte… y quedarme. 💗
           </div>
 
           <div class="pillRow">
             <div class="pill">ELEGIRNOS SIEMPRE</div>
-            <div class="pill">APOYARNOS</div>
-            <div class="pill">AMOR BONITO</div>
+            <div class="pill">SANAR DESPACITO</div>
+            <div class="pill">AMOR QUE SE CUIDA</div>
             <div class="pill">METAS Y FAMILIA</div>
           </div>
 
@@ -549,25 +606,59 @@
             <button class="btn btnSoft" id="hugBtn" type="button">Abracito primero 🤍</button>
             <button class="btn btnGhost" id="pauseBtn" type="button">⏸ Pausar música</button>
           </div>
+
+          <!-- CONTADOR -->
+          <div class="counterBox">
+            <p class="counterTitle">⏳ Mi amor por ti comenzó el <strong>29 de junio del 2023</strong> 💞</p>
+            <div class="counterGrid" aria-label="Contador de amor">
+              <div class="counterChip">
+                <div class="counterNum" id="cYears">0</div>
+                <div class="counterLbl">AÑOS</div>
+              </div>
+              <div class="counterChip">
+                <div class="counterNum" id="cDays">0</div>
+                <div class="counterLbl">DÍAS</div>
+              </div>
+              <div class="counterChip">
+                <div class="counterNum" id="cHours">00</div>
+                <div class="counterLbl">HORAS</div>
+              </div>
+              <div class="counterChip">
+                <div class="counterNum" id="cMins">00</div>
+                <div class="counterLbl">MINUTOS</div>
+              </div>
+              <div class="counterChip">
+                <div class="counterNum" id="cSecs">00</div>
+                <div class="counterLbl">SEGUNDOS</div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <aside class="side">
-          <h3>05/02/2024 — Lima 💫</h3>
+          <h3>🎵 Nuestra canción habla de esto…</h3>
           <ul class="list">
-            <li>Nuestro primer viaje… y esa sensación de “esto es real”.</li>
-            <li>Parque de las Leyendas, playa, parques de agua, Costa Verde…</li>
-            <li>Una frase que se me quedó para siempre: <strong>“mi mundo eres tú”</strong>.</li>
+            <li>Volver a elegirnos, incluso en lo difícil.</li>
+            <li>Más tiempo, más presencia, más verdad.</li>
+            <li>Un amor que cuida, respeta y sostiene.</li>
+            <li>Metas, compromiso… y un hogar bonito contigo. 💗</li>
           </ul>
 
           <div class="divider"></div>
 
-          <h3>Lo que quiero construir contigo</h3>
+          <h3>Lo que quiero construir</h3>
           <ul class="list">
-            <li>Apoyarnos en todo, de verdad.</li>
-            <li>Seguir creciendo con metas claras.</li>
-            <li>Un amor que se cuida y se respeta.</li>
-            <li>Comprometernos, casarnos… y formar una familia.</li>
+            <li>Un “nosotros” con paz y confianza.</li>
+            <li>Detalles cotidianos que te hagan sentir amada.</li>
+            <li>Comprometernos y casarnos… y formar una familia.</li>
+            <li>Verte brillar, y estar ahí de tu mano. ✨</li>
           </ul>
+
+          <div class="divider"></div>
+
+          <button class="toolBtn" id="lyricsBtn2" type="button" style="width:100%; text-align:center;">
+            🎶 Abrir la letra completa
+          </button>
         </aside>
       </section>
 
@@ -577,15 +668,15 @@
         <div class="box">
           <h4>Lo que quiero que sientas</h4>
           <p>
-            Paz. Confianza. Un amor que suma.
-            Que estés segura de que estoy contigo en las buenas… y en los retos.
+            Paz. Seguridad. Un amor claro.
+            No solo palabras… acciones que te abracen y te cuiden. 🤍
           </p>
         </div>
 
         <div class="box">
           <h4>La pregunta final 💘</h4>
           <p>
-            Massiel… ¿quieres ser mi San Valentín?
+            Massiel… ¿quieres ser mi San Valentín? ✨
           </p>
         </div>
       </section>
@@ -638,95 +729,126 @@
       if(btn) btn.textContent = "🔊 Música: OFF";
     }
 
-    // ===== CONTADOR (29 junio 2023) =====
-    // Nota: el "-05:00" lo fija a hora Perú para que el cálculo sea consistente.
-    const loveStart = new Date("2023-06-29T00:00:00-05:00");
+    // ✅ LETRA COMPLETA (tal cual la pegaste)
+    const LYRICS = `[Intro]
+Massiel… mi vida…
 
-    const elYears = document.getElementById("cYears");
-    const elDays  = document.getElementById("cDays");
-    const elHours = document.getElementById("cHours");
-    const elMins  = document.getElementById("cMins");
-    const elSecs  = document.getElementById("cSecs");
+[Verse 1]
+Yo sé que hubo momentos donde no estuve,
+cuando tú necesitabas mi presencia y mi fe.
+Y aunque yo te amo, me faltó demostrar,
+me quedé a medias… y eso duele recordar.
+No vengo a justificarme, vengo a reconocer:
+que el amor también es estar, sostener y proteger.
+Si me dijiste “vuelve a enamorarme”, aquí estoy…
+con el corazón dispuesto y la intención mejor.
 
-    const pad2 = (n) => String(n).padStart(2, "0");
+[Pre-Chorus]
+Porque hoy entiendo lo que tú querías sentir:
+una versión más segura de mí… sin dudar, sin huir.
+Y si me miras, yo lo voy a hacer real:
+más tiempo, más presencia, más verdad.
 
-    function addYearsSafe(date, yearsToAdd){
-      // Mantiene el mismo mes/día si existe; si no (29 feb), ajusta automáticamente.
-      const d = new Date(date.getTime());
-      const targetYear = d.getUTCFullYear() + yearsToAdd;
-      const targetMonth = d.getUTCMonth();
-      const targetDate = d.getUTCDate();
+[Chorus]
+Volver a elegirnos, con más amor y más paciencia,
+sanar despacito, sin promesas vacías.
+Que mi amor se note en cómo te cuido también,
+en cómo te escucho, en cómo te sostengo bien.
+Volver a elegirnos… y volver a empezar,
+con más firmeza, con más calma, con más paz.
+Porque tú eres mi reyna, mi vida, mi hogar…
+y yo quiero ser el hombre que tú mereces de verdad.
 
-      const out = new Date(d.getTime());
-      out.setUTCFullYear(targetYear, targetMonth, targetDate);
+[Verse 2]
+Y me acuerdo clarito: cinco de febrero,
+dos mil veinticuatro… nuestro primer “nosotros” entero.
+Lima fue testigo de mi corazón al límite,
+porque ibas a mi lado y todo se sintió posible.
+Parque de las Leyendas, la playa y el agua en la piel,
+Costa Verde, risas… y yo mirándote así: “mi mundo eres tú”.
+Tantas aventuras… y yo pensando en silencio:
+“Si esto es un sueño, que dure el resto del tiempo”.
 
-      // Si el mes cambió (caso 29 feb), lo ajustamos al último día del mes anterior
-      if(out.getUTCMonth() !== targetMonth){
-        out.setUTCDate(0);
-      }
-      return out;
-    }
+[Pre-Chorus 2]
+Y hoy lo tengo claro, no lo voy a soltar,
+porque cuando eres tú… todo tiene lugar.
+No solo decir “sí”, sino demostrar:
+que contigo me quedo… y voy a cuidar.
 
-    function updateCounter(){
-      const now = new Date();
+[Chorus]
+Volver a elegirnos, con más amor y más paciencia,
+sanar despacito, sin promesas vacías.
+Que mi amor se note en cómo te cuido también,
+en cómo te respeto, en cómo te abrazo bien.
+Volver a elegirnos… y volver a empezar,
+con más firmeza, con más tiempo, con más paz.
+Porque tú eres mi reyna, mi vida, mi hogar…
+y yo quiero ser el hombre que tú mereces de verdad.
 
-      if(now < loveStart){
-        // Si por alguna razón la fecha del dispositivo es anterior
-        elYears.textContent = "0";
-        elDays.textContent  = "0";
-        elHours.textContent = "00";
-        elMins.textContent  = "00";
-        elSecs.textContent  = "00";
-        return;
-      }
+[Bridge]
+Yo no quiero un amor que se rinda en los baches,
+yo quiero un amor que abrace… y que se levante.
+Quiero caminar contigo hasta comprometernos y casarnos,
+y que el futuro diga: “ellos sí supieron quererse”.
+Quiero verte brillar, y estar ahí de tu mano,
+celebrar tus logros, cuidarte en lo cotidiano.
+Y después… una familia, un “nosotros” sin miedo,
+un hogar donde el amor sea el idioma verdadero.
 
-      // 1) Calcula años completos transcurridos (calendario)
-      let years = 0;
-      while(addYearsSafe(loveStart, years + 1) <= now) years++;
+[Chorus - Final]
+Volver a elegirnos… incluso en lo difícil,
+cuando el mundo aprieta, que lo nuestro sea invencible.
+Tú eres mi vida, mi reyna, mi razón…
+y yo voy a cuidarte con firmeza y con amor.
+Volver a elegirnos… y volver a empezar…
+Massiel… yo te elijo… una y otra vez, sin final.
 
-      const afterYears = addYearsSafe(loveStart, years);
+[Outro]
+Y si me das la mano… te prometo algo simple:
+cuidarte con amor… y elegirnos para siempre.`;
 
-      // 2) Lo restante en ms (días, horas, minutos, segundos)
-      let diff = now - afterYears;
-
-      const dayMs = 24*60*60*1000;
-      const hourMs = 60*60*1000;
-      const minMs = 60*1000;
-
-      const days = Math.floor(diff / dayMs);
-      diff -= days * dayMs;
-
-      const hours = Math.floor(diff / hourMs);
-      diff -= hours * hourMs;
-
-      const mins = Math.floor(diff / minMs);
-      diff -= mins * minMs;
-
-      const secs = Math.floor(diff / 1000);
-
-      elYears.textContent = String(years);
-      elDays.textContent  = String(days);
-      elHours.textContent = pad2(hours);
-      elMins.textContent  = pad2(mins);
-      elSecs.textContent  = pad2(secs);
-    }
-
-    // Actualiza rápido y suave
-    updateCounter();
-    setInterval(updateCounter, 1000);
-
-    // STORY SLIDES
+    // STORY SLIDES (rutas EXACTAS a tus archivos)
     const slides = [
-      { img:"fotos01.jpg", text:"🏃‍♂️🏃‍♀️ Nuestro segundo Ultra 💪✨\nVerte ahí, con esa fuerza… me hizo admirarte más.\nContigo, todo se siente posible 🫶" },
-      { img:"fotos02.jpg", text:"🏫💗 Me acompañaste a una promoción del cole\nGracias por sumarte a mis días y apoyarme.\nMe encanta que seamos equipo 🤝✨" },
-      { img:"fotos03.jpg", text:"🎄✨ Navidad en la plaza de Caraz\nTu sonrisa le pone magia a cualquier lugar.\nQué bonito es compartir contigo 🥹💗" },
-      { img:"fotos04.jpg", text:"🎆🍽️ Cena de Año Nuevo\nUn nuevo comienzo… y mi deseo es simple:\nseguir caminando contigo, de la mano 💞" },
-      { img:"fotos05.jpg", text:"🌿🏃‍♀️ Recreo campestre\nRisas, aire libre y nosotros.\nAsí se ve un amor que suma 😄🤍" },
-      { img:"fotos06.jpg", text:"🏞️💙 Paseo a la Laguna Radian\nQué paz… y qué suerte la mía de tenerte a mi lado.\nContigo, el mundo se calma ✨" },
-      { img:"fotos07.jpg", text:"🌊☀️ Paseo a la playa\nEl mar, el día… y tú haciendo todo más bonito.\nMe encanta vivir estas aventuras contigo 🫶💗" },
-      { img:"fotos08.jpg", text:"🕺💃 Nuestra primera salida a la discoteca en Lima ✨\nFue un plan diferente, pero contigo todo se disfruta.\nGracias por ser mi compañera 😍" },
-      { img:"fotos09.jpg", text:"🍳🏠 Primera vez cocinando en tu casa\nAprendiendo juntos, riéndonos, haciendo hogar.\nYo quiero más de esto… contigo 🥰" },
-      { img:"fotos10.jpg", text:"🏞️💫 Otra foto en la Laguna Radian\nMassiel… yo te elijo.\nHoy, mañana y en cada meta que soñemos.\n\n💘 ¿Quieres ser mi San Valentín?" },
+      {
+        img:"fotos01.jpg",
+        text:"🏃‍♂️🏃‍♀️ Nuestro segundo Ultra 💪✨\nDiversión, esfuerzo y nosotros.\nContigo, todo se siente posible… y mi lugar es a tu lado. 💗"
+      },
+      {
+        img:"fotos02.jpg",
+        text:"🏫💞 Me acompañaste a una promoción del cole\nGracias por apoyarme y caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶"
+      },
+      {
+        img:"fotos03.jpg",
+        text:"🎄🌟 Navidad en la plaza de Caraz\nQué bonito se siente cuando la magia no está en las luces…\nestá en ti. ✨💗"
+      },
+      {
+        img:"fotos04.jpg",
+        text:"🥂✨ Cena de Año Nuevo 🎆\nUn año más… y mi deseo sigue siendo el mismo:\nseguir eligiéndote, con más amor y más verdad. 💞"
+      },
+      {
+        img:"fotos05.jpg",
+        text:"🌿😄 Recreo campestre\nRisas, aire libre y tus ojitos.\nAsí se ve la felicidad cuando es contigo. 🤍"
+      },
+      {
+        img:"fotos06.jpg",
+        text:"🏞️💙 Laguna Radian\nQué paz… qué calma.\nY qué suerte la mía de tenerte cerquita. ✨"
+      },
+      {
+        img:"fotos07.jpg",
+        text:"🌊☀️ Paseo a la playa\nEl mar es bonito…\npero tú haces que todo sea más bonito. 💗"
+      },
+      {
+        img:"fotos08.jpg",
+        text:"🕺💃✨ Nuestra primera salida a la discoteca en Lima\nUna aventura que nunca olvido.\nPorque lo mejor… fue compartirla contigo. 😍"
+      },
+      {
+        img:"fotos09.jpg",
+        text:"🍳🏠💞 Primera vez cocinando en tu casa\nNuevos giros, nuevos momentos.\nContigo, hasta lo simple se vuelve especial. 🫶"
+      },
+      {
+        img:"fotos10.jpg",
+        text:"🏞️💫 Laguna Radian (otra vez)\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗\n\n💘 Massiel… ¿quieres ser mi San Valentín?"
+      }
     ];
 
     // STORY PLAYER
@@ -758,11 +880,7 @@
       storyImg.onload = () => storyImg.classList.add("show");
       storyImg.onerror = () => {
         storyImg.classList.add("show");
-        storyText.textContent =
-          "⚠️ No cargó una foto.\n" +
-          "Revisa el nombre del archivo en GitHub.\n\n" +
-          "Se intentó cargar:\n" + src + "\n\n" +
-          "(igual puedes seguir)";
+        storyText.textContent = "⚠️ No cargó una foto.\nRevisa el nombre del archivo en GitHub.\n\nSe intentó cargar:\n" + src + "\n\n(igual puedes seguir)";
       };
     }
 
@@ -774,13 +892,13 @@
 
       prevBtn.disabled = idx === 0;
       prevBtn.style.opacity = idx === 0 ? ".55" : "1";
-
       nextBtn.textContent = (idx === slides.length - 1) ? "Finalizar ✨" : "Siguiente ➜";
     }
 
     function finishStory(){
       story.style.display = "none";
       mainWrap.style.display = "flex";
+      // Como ya hubo clic, el navegador permite reproducir
       tryPlay();
     }
 
@@ -800,7 +918,30 @@
     const pauseBtn = document.getElementById("pauseBtn");
     const yesBtn   = document.getElementById("yesBtn");
     const hugBtn   = document.getElementById("hugBtn");
-    const readBtn  = document.getElementById("readBtn");
+
+    // LETRA MODAL
+    const lyricsModal = document.getElementById("lyricsModal");
+    const lyricsBox   = document.getElementById("lyricsBox");
+    const closeLyrics = document.getElementById("closeLyrics");
+    const lyricsBtn   = document.getElementById("lyricsBtn");
+    const lyricsBtn2  = document.getElementById("lyricsBtn2");
+
+    lyricsBox.textContent = LYRICS;
+
+    function openLyrics(){
+      lyricsModal.style.display = "flex";
+      lyricsModal.setAttribute("aria-hidden","false");
+    }
+    function closeLyricsFn(){
+      lyricsModal.style.display = "none";
+      lyricsModal.setAttribute("aria-hidden","true");
+    }
+    if(lyricsBtn)  lyricsBtn.addEventListener("click", openLyrics);
+    if(lyricsBtn2) lyricsBtn2.addEventListener("click", openLyrics);
+    if(closeLyrics) closeLyrics.addEventListener("click", closeLyricsFn);
+    lyricsModal.addEventListener("click", (e) => {
+      if(e.target === lyricsModal) closeLyricsFn();
+    });
 
     if(musicBtn){
       musicBtn.addEventListener("click", async () => {
@@ -819,17 +960,6 @@
         }catch{
           toast("Copia manual: " + link);
         }
-      });
-    }
-
-    if(readBtn){
-      readBtn.addEventListener("click", () => {
-        alert(
-          "Massiel… mi vida.\n\n" +
-          "Yo quiero que lo nuestro sea un equipo: apoyarnos, elegirnos y crecer.\n" +
-          "Con metas claras, con amor bonito y con paz.\n\n" +
-          "Te elijo. Siempre. 💗"
-        );
       });
     }
 
@@ -895,7 +1025,61 @@
       toastTimer = setTimeout(()=> el.style.opacity="0", 1400);
     }
 
-    // Start
+    // ✅ CONTADOR (29/06/2023) — años, días, horas, minutos, segundos
+    const startDate = new Date(2023, 5, 29, 0, 0, 0); // mes 5 = junio
+
+    const elYears = document.getElementById("cYears");
+    const elDays  = document.getElementById("cDays");
+    const elHours = document.getElementById("cHours");
+    const elMins  = document.getElementById("cMins");
+    const elSecs  = document.getElementById("cSecs");
+
+    function pad2(n){ return String(n).padStart(2,"0"); }
+
+    function updateCounter(){
+      const now = new Date();
+
+      // años completos
+      let years = now.getFullYear() - startDate.getFullYear();
+      const annivThisYear = new Date(startDate);
+      annivThisYear.setFullYear(startDate.getFullYear() + years);
+
+      if(now < annivThisYear){
+        years--;
+      }
+
+      const anchor = new Date(startDate);
+      anchor.setFullYear(startDate.getFullYear() + years);
+
+      let diffMs = now - anchor;
+      if(diffMs < 0) diffMs = 0;
+
+      const dayMs = 24*60*60*1000;
+      const hourMs = 60*60*1000;
+      const minMs = 60*1000;
+
+      const days = Math.floor(diffMs / dayMs);
+      diffMs -= days * dayMs;
+
+      const hours = Math.floor(diffMs / hourMs);
+      diffMs -= hours * hourMs;
+
+      const mins = Math.floor(diffMs / minMs);
+      diffMs -= mins * minMs;
+
+      const secs = Math.floor(diffMs / 1000);
+
+      if(elYears) elYears.textContent = years;
+      if(elDays)  elDays.textContent  = days;
+      if(elHours) elHours.textContent = pad2(hours);
+      if(elMins)  elMins.textContent  = pad2(mins);
+      if(elSecs)  elSecs.textContent  = pad2(secs);
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
+
+    // Start story
     render();
   </script>
 </body>

@@ -18,7 +18,6 @@
       --good:#18b26b;
       --shadow: 0 18px 50px rgba(0,0,0,.18);
       --radius: 26px;
-      --ring: 0 0 0 3px rgba(255,46,134,.18);
     }
 
     *{ box-sizing:border-box; }
@@ -132,6 +131,7 @@
     @media (max-width: 860px){
       .hero{ grid-template-columns:1fr; }
     }
+
     .title{
       font-size: clamp(28px, 4.2vw, 46px);
       margin: 14px 0 8px;
@@ -214,10 +214,7 @@
       position:relative;
       overflow:hidden;
     }
-    .side h3{
-      margin:0 0 8px;
-      font-size:18px;
-    }
+    .side h3{ margin:0 0 8px; font-size:18px; }
     .list{
       margin:0;
       padding-left:18px;
@@ -305,7 +302,29 @@
       font-size:14px;
     }
 
-    /* ===== STORY OVERLAY (sin saltar) ===== */
+    /* botón whatsapp final */
+    .waBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      width:100%;
+      margin-top:10px;
+      padding:14px 16px;
+      border-radius: 16px;
+      border: none;
+      cursor:pointer;
+      font-weight:950;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: #fff;
+      box-shadow: 0 12px 24px rgba(18,140,126,.22);
+      transition: transform .12s ease, filter .12s ease;
+      user-select:none;
+    }
+    .waBtn:hover{ transform: translateY(-1px); }
+    .waBtn:active{ transform: translateY(1px); }
+
+    /* ===== STORY OVERLAY (sin recorte) ===== */
     .storyOverlay{
       position: fixed;
       inset: 0;
@@ -380,7 +399,7 @@
       align-items:center;
       justify-content:center;
     }
-    /* ✅ para que NO se recorte: CONTAIN */
+    /* ✅ sin recorte: contain */
     .storyMedia img{
       width:100%;
       height:100%;
@@ -481,9 +500,7 @@
       border: 1px solid rgba(0,0,0,.10);
       color:#2f2f44;
     }
-    .modalBody{
-      padding:14px;
-    }
+    .modalBody{ padding:14px; }
     .lyricsBox{
       background: rgba(255,255,255,.88);
       border:1px solid rgba(0,0,0,.07);
@@ -529,7 +546,7 @@
 <body>
   <div class="hearts" aria-hidden="true" id="hearts"></div>
 
-  <!-- STORY OVERLAY (SIN SALTAR) -->
+  <!-- STORY OVERLAY -->
   <div class="storyOverlay" id="story">
     <div class="storyCard">
       <div class="storyTop">
@@ -557,12 +574,12 @@
   <div class="modal" id="lyricsModal" aria-hidden="true">
     <div class="modalCard" role="dialog" aria-modal="true" aria-labelledby="lyricsTitle">
       <div class="modalTop">
-        <h3 id="lyricsTitle">🎶 La letra — “Volver a elegirnos”</h3>
+        <h3 id="lyricsTitle">🎶 La letra</h3>
         <button class="closeBtn" id="closeLyrics" type="button">✖ Cerrar</button>
       </div>
       <div class="modalBody">
         <div class="lyricsBox" id="lyricsBox"></div>
-        <p class="lyricsHint">💗 Esta canción la hicimos con intención bonita: cuidarnos, elegirnos y construir un “nosotros” con paz.</p>
+        <p class="lyricsHint">💗 Esta canción dice lo que siento: elegirnos, cuidarnos y construir nuestro “nosotros” con paz.</p>
       </div>
     </div>
   </div>
@@ -574,7 +591,6 @@
         <div class="badge">💗 Mensaje especial</div>
         <div class="tools">
           <button class="toolBtn" id="musicBtn" type="button">🔊 Música: OFF</button>
-          <button class="toolBtn" id="copyBtn" type="button">📋 Copiar link</button>
           <button class="toolBtn" id="lyricsBtn" type="button">🎶 Ver letra</button>
         </div>
       </div>
@@ -584,14 +600,14 @@
           <h1 class="title">Massiel… <br>mi mundo eres tú ✨</h1>
 
           <p class="subtitle">
-            Esta página no es para culpas ni indirectas…
-            es para mirarnos con cariño y decirnos la verdad:
-            <strong>te elijo</strong>, y quiero que lo sientas en acciones.
+            Esta página es para apoyarnos, elegirnos y caminar bonito.
+            Que lo nuestro se sienta en lo cotidiano:
+            <strong>más tiempo, más presencia y más verdad</strong>.
           </p>
 
           <div class="callout">
-            <strong>Promesa bonita:</strong> caminar contigo con más presencia, más calma y más firmeza.
-            Que el amor se note en lo simple: escucharte, cuidarte, respetarte… y quedarme. 💗
+            <strong>Promesa bonita:</strong> caminar contigo, apoyarnos y cuidarnos.
+            Que lo nuestro se note en lo simple: escucharte, respetarte, animarte… y quedarme. 💗
           </div>
 
           <div class="pillRow">
@@ -636,22 +652,22 @@
         </div>
 
         <aside class="side">
-          <h3>🎵 Nuestra canción habla de esto…</h3>
+          <h3>🎵 Lo que dice nuestra canción</h3>
           <ul class="list">
-            <li>Volver a elegirnos, incluso en lo difícil.</li>
+            <li>Elegirnos con amor y paciencia.</li>
+            <li>Que mi amor se note en cómo te cuido.</li>
             <li>Más tiempo, más presencia, más verdad.</li>
-            <li>Un amor que cuida, respeta y sostiene.</li>
-            <li>Metas, compromiso… y un hogar bonito contigo. 💗</li>
+            <li>Metas, compromiso… y un hogar contigo. 💗</li>
           </ul>
 
           <div class="divider"></div>
 
-          <h3>Lo que quiero construir</h3>
+          <h3>Lo que quiero construir contigo</h3>
           <ul class="list">
-            <li>Un “nosotros” con paz y confianza.</li>
-            <li>Detalles cotidianos que te hagan sentir amada.</li>
-            <li>Comprometernos y casarnos… y formar una familia.</li>
-            <li>Verte brillar, y estar ahí de tu mano. ✨</li>
+            <li>Apoyarnos en todo, de verdad.</li>
+            <li>Seguir creciendo con metas claras.</li>
+            <li>Un amor que se cuida y se respeta.</li>
+            <li>Comprometernos, casarnos… y formar una familia.</li>
           </ul>
 
           <div class="divider"></div>
@@ -676,15 +692,18 @@
         <div class="box">
           <h4>La pregunta final 💘</h4>
           <p>
-            Massiel… ¿quieres ser mi San Valentín? ✨
+            Si tú también me eliges… me harías muy feliz.
           </p>
+          <button class="waBtn" id="waBtn" type="button">
+            💚 Sí, quiero ser tu San Valentín
+          </button>
         </div>
       </section>
     </main>
   </div>
 
   <!-- Audio -->
-  <audio id="bgm" src="massiel-mi-vida.mp3" preload="auto" loop></audio>
+  <audio id="bgm" src="./massiel-mi-vida.mp3" preload="auto" loop></audio>
   <div class="confetti" id="confetti" aria-hidden="true"></div>
 
   <script>
@@ -706,10 +725,41 @@
       }
     })();
 
-    // Audio controls
+    // Toast
+    let toastTimer = null;
+    function toast(text){
+      let el = document.getElementById("toast");
+      if(!el){
+        el = document.createElement("div");
+        el.id="toast";
+        el.style.position="fixed";
+        el.style.left="50%";
+        el.style.bottom="18px";
+        el.style.transform="translateX(-50%)";
+        el.style.background="rgba(0,0,0,.72)";
+        el.style.color="white";
+        el.style.padding="10px 14px";
+        el.style.borderRadius="999px";
+        el.style.fontWeight="800";
+        el.style.fontSize="13px";
+        el.style.zIndex="2000";
+        el.style.boxShadow="0 10px 25px rgba(0,0,0,.22)";
+        document.body.appendChild(el);
+      }
+      el.textContent = text;
+      el.style.opacity="1";
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(()=> el.style.opacity="0", 1600);
+    }
+
+    // Audio controls (más robusto)
     const audio = document.getElementById("bgm");
-    audio.volume = 0.65;
+    audio.volume = 0.75;
     let musicOn = false;
+
+    audio.addEventListener("error", () => {
+      toast("⚠️ No se encontró la música. Revisa: massiel-mi-vida.mp3");
+    });
 
     async function tryPlay(){
       try{
@@ -719,6 +769,7 @@
         if(btn) btn.textContent = "🔊 Música: ON";
         return true;
       }catch(e){
+        // el navegador bloquea autoplay; se arregla con un clic
         return false;
       }
     }
@@ -729,37 +780,47 @@
       if(btn) btn.textContent = "🔊 Música: OFF";
     }
 
-    // ✅ LETRA COMPLETA (tal cual la pegaste)
-    const LYRICS = `[Intro]
-Massiel… mi vida…
+    // ✅ intento automático en el PRIMER toque/clic en cualquier parte
+    let firstGestureDone = false;
+    async function onFirstGesture(){
+      if(firstGestureDone) return;
+      firstGestureDone = true;
+      const ok = await tryPlay();
+      if(!ok){
+        toast("🔊 Toca el botón de música para activar");
+      }
+      window.removeEventListener("pointerdown", onFirstGesture);
+      window.removeEventListener("keydown", onFirstGesture);
+    }
+    window.addEventListener("pointerdown", onFirstGesture, { once:false });
+    window.addEventListener("keydown", onFirstGesture, { once:false });
 
-[Verse 1]
+    // ✅ LETRA SIN [Intro], [Verse], etc. y sin “...”
+    const LYRICS = `Massiel… mi vida…
+
 Yo sé que hubo momentos donde no estuve,
 cuando tú necesitabas mi presencia y mi fe.
 Y aunque yo te amo, me faltó demostrar,
 me quedé a medias… y eso duele recordar.
 No vengo a justificarme, vengo a reconocer:
 que el amor también es estar, sostener y proteger.
-Si me dijiste “vuelve a enamorarme”, aquí estoy…
+Si me dijiste “vuelve a enamorarme”, aquí estoy,
 con el corazón dispuesto y la intención mejor.
 
-[Pre-Chorus]
 Porque hoy entiendo lo que tú querías sentir:
-una versión más segura de mí… sin dudar, sin huir.
+una versión más segura de mí, sin dudar, sin huir.
 Y si me miras, yo lo voy a hacer real:
 más tiempo, más presencia, más verdad.
 
-[Chorus]
 Volver a elegirnos, con más amor y más paciencia,
 sanar despacito, sin promesas vacías.
 Que mi amor se note en cómo te cuido también,
 en cómo te escucho, en cómo te sostengo bien.
-Volver a elegirnos… y volver a empezar,
+Volver a elegirnos y volver a empezar,
 con más firmeza, con más calma, con más paz.
-Porque tú eres mi reyna, mi vida, mi hogar…
+Porque tú eres mi reyna, mi vida, mi hogar,
 y yo quiero ser el hombre que tú mereces de verdad.
 
-[Verse 2]
 Y me acuerdo clarito: cinco de febrero,
 dos mil veinticuatro… nuestro primer “nosotros” entero.
 Lima fue testigo de mi corazón al límite,
@@ -767,27 +828,24 @@ porque ibas a mi lado y todo se sintió posible.
 Parque de las Leyendas, la playa y el agua en la piel,
 Costa Verde, risas… y yo mirándote así: “mi mundo eres tú”.
 Tantas aventuras… y yo pensando en silencio:
-“Si esto es un sueño, que dure el resto del tiempo”.
+Si esto es un sueño, que dure el resto del tiempo.
 
-[Pre-Chorus 2]
 Y hoy lo tengo claro, no lo voy a soltar,
 porque cuando eres tú… todo tiene lugar.
 No solo decir “sí”, sino demostrar:
 que contigo me quedo… y voy a cuidar.
 
-[Chorus]
 Volver a elegirnos, con más amor y más paciencia,
 sanar despacito, sin promesas vacías.
 Que mi amor se note en cómo te cuido también,
 en cómo te respeto, en cómo te abrazo bien.
-Volver a elegirnos… y volver a empezar,
+Volver a elegirnos y volver a empezar,
 con más firmeza, con más tiempo, con más paz.
-Porque tú eres mi reyna, mi vida, mi hogar…
+Porque tú eres mi reyna, mi vida, mi hogar,
 y yo quiero ser el hombre que tú mereces de verdad.
 
-[Bridge]
 Yo no quiero un amor que se rinda en los baches,
-yo quiero un amor que abrace… y que se levante.
+yo quiero un amor que abrace y que se levante.
 Quiero caminar contigo hasta comprometernos y casarnos,
 y que el futuro diga: “ellos sí supieron quererse”.
 Quiero verte brillar, y estar ahí de tu mano,
@@ -795,19 +853,17 @@ celebrar tus logros, cuidarte en lo cotidiano.
 Y después… una familia, un “nosotros” sin miedo,
 un hogar donde el amor sea el idioma verdadero.
 
-[Chorus - Final]
 Volver a elegirnos… incluso en lo difícil,
 cuando el mundo aprieta, que lo nuestro sea invencible.
-Tú eres mi vida, mi reyna, mi razón…
+Tú eres mi vida, mi reyna, mi razón,
 y yo voy a cuidarte con firmeza y con amor.
-Volver a elegirnos… y volver a empezar…
+Volver a elegirnos y volver a empezar,
 Massiel… yo te elijo… una y otra vez, sin final.
 
-[Outro]
 Y si me das la mano… te prometo algo simple:
 cuidarte con amor… y elegirnos para siempre.`;
 
-    // STORY SLIDES (rutas EXACTAS a tus archivos)
+    // STORY SLIDES
     const slides = [
       {
         img:"fotos01.jpg",
@@ -817,38 +873,14 @@ cuidarte con amor… y elegirnos para siempre.`;
         img:"fotos02.jpg",
         text:"🏫💞 Me acompañaste a una promoción del cole\nGracias por apoyarme y caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶"
       },
-      {
-        img:"fotos03.jpg",
-        text:"🎄🌟 Navidad en la plaza de Caraz\nQué bonito se siente cuando la magia no está en las luces…\nestá en ti. ✨💗"
-      },
-      {
-        img:"fotos04.jpg",
-        text:"🥂✨ Cena de Año Nuevo 🎆\nUn año más… y mi deseo sigue siendo el mismo:\nseguir eligiéndote, con más amor y más verdad. 💞"
-      },
-      {
-        img:"fotos05.jpg",
-        text:"🌿😄 Recreo campestre\nRisas, aire libre y tus ojitos.\nAsí se ve la felicidad cuando es contigo. 🤍"
-      },
-      {
-        img:"fotos06.jpg",
-        text:"🏞️💙 Laguna Radian\nQué paz… qué calma.\nY qué suerte la mía de tenerte cerquita. ✨"
-      },
-      {
-        img:"fotos07.jpg",
-        text:"🌊☀️ Paseo a la playa\nEl mar es bonito…\npero tú haces que todo sea más bonito. 💗"
-      },
-      {
-        img:"fotos08.jpg",
-        text:"🕺💃✨ Nuestra primera salida a la discoteca en Lima\nUna aventura que nunca olvido.\nPorque lo mejor… fue compartirla contigo. 😍"
-      },
-      {
-        img:"fotos09.jpg",
-        text:"🍳🏠💞 Primera vez cocinando en tu casa\nNuevos giros, nuevos momentos.\nContigo, hasta lo simple se vuelve especial. 🫶"
-      },
-      {
-        img:"fotos10.jpg",
-        text:"🏞️💫 Laguna Radian (otra vez)\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗\n\n💘 Massiel… ¿quieres ser mi San Valentín?"
-      }
+      { img:"fotos03.jpg", text:"🎄🌟 Navidad en la plaza de Caraz\nQué bonito se siente cuando la magia no está en las luces…\nestá en ti. ✨💗" },
+      { img:"fotos04.jpg", text:"🥂✨ Cena de Año Nuevo 🎆\nUn año más… y mi deseo sigue siendo el mismo:\nseguir eligiéndote, con más amor y más verdad. 💞" },
+      { img:"fotos05.jpg", text:"🌿😄 Recreo campestre\nRisas, aire libre y tus ojitos.\nAsí se ve la felicidad cuando es contigo. 🤍" },
+      { img:"fotos06.jpg", text:"🏞️💙 Laguna Radian\nQué paz… qué calma.\nY qué suerte la mía de tenerte cerquita. ✨" },
+      { img:"fotos07.jpg", text:"🌊☀️ Paseo a la playa\nEl mar es bonito…\npero tú haces que todo sea más bonito. 💗" },
+      { img:"fotos08.jpg", text:"🕺💃✨ Nuestra primera salida a la discoteca en Lima\nUna aventura que nunca olvido.\nPorque lo mejor… fue compartirla contigo. 😍" },
+      { img:"fotos09.jpg", text:"🍳🏠💞 Primera vez cocinando en tu casa\nNuevos giros, nuevos momentos.\nContigo, hasta lo simple se vuelve especial. 🫶" },
+      { img:"fotos10.jpg", text:"🏞️💫 Laguna Radian\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗" }
     ];
 
     // STORY PLAYER
@@ -898,7 +930,7 @@ cuidarte con amor… y elegirnos para siempre.`;
     function finishStory(){
       story.style.display = "none";
       mainWrap.style.display = "flex";
-      // Como ya hubo clic, el navegador permite reproducir
+      // aquí ya hay interacción, debería sonar
       tryPlay();
     }
 
@@ -914,12 +946,37 @@ cuidarte con amor… y elegirnos para siempre.`;
 
     // MAIN BUTTONS
     const musicBtn = document.getElementById("musicBtn");
-    const copyBtn  = document.getElementById("copyBtn");
     const pauseBtn = document.getElementById("pauseBtn");
     const yesBtn   = document.getElementById("yesBtn");
     const hugBtn   = document.getElementById("hugBtn");
 
-    // LETRA MODAL
+    if(musicBtn){
+      musicBtn.addEventListener("click", async () => {
+        if(musicOn) pauseMusic();
+        else {
+          const ok = await tryPlay();
+          if(!ok) toast("🔊 El navegador bloqueó la música. Intenta otra vez.");
+        }
+      });
+    }
+    if(pauseBtn) pauseBtn.addEventListener("click", pauseMusic);
+
+    if(hugBtn){
+      hugBtn.addEventListener("click", async () => {
+        await tryPlay();
+        toast("🤍 Abracito enviado");
+      });
+    }
+
+    if(yesBtn){
+      yesBtn.addEventListener("click", async () => {
+        await tryPlay();
+        confettiPop();
+        toast("💘 ¡Qué lindo! 💚");
+      });
+    }
+
+    // MODAL LETRA
     const lyricsModal = document.getElementById("lyricsModal");
     const lyricsBox   = document.getElementById("lyricsBox");
     const closeLyrics = document.getElementById("closeLyrics");
@@ -943,38 +1000,19 @@ cuidarte con amor… y elegirnos para siempre.`;
       if(e.target === lyricsModal) closeLyricsFn();
     });
 
-    if(musicBtn){
-      musicBtn.addEventListener("click", async () => {
-        if(musicOn) pauseMusic();
-        else await tryPlay();
-      });
-    }
-    if(pauseBtn) pauseBtn.addEventListener("click", pauseMusic);
-
-    if(copyBtn){
-      copyBtn.addEventListener("click", async () => {
-        const link = window.location.href;
-        try{
-          await navigator.clipboard.writeText(link);
-          toast("✅ Link copiado");
-        }catch{
-          toast("Copia manual: " + link);
-        }
-      });
-    }
-
-    if(hugBtn){
-      hugBtn.addEventListener("click", async () => {
-        await tryPlay();
-        toast("🤍 Abracito enviado");
-      });
-    }
-
-    if(yesBtn){
-      yesBtn.addEventListener("click", async () => {
+    // ✅ WhatsApp button
+    const waBtn = document.getElementById("waBtn");
+    if(waBtn){
+      waBtn.addEventListener("click", async () => {
         await tryPlay();
         confettiPop();
-        toast("💘 ¡Qué lindo! 💚");
+
+        const phone = "51982690642"; // +51 Perú
+        const msg = "Sí, quiero ser tu San Valentín 💚✨";
+        const url = "https://wa.me/" + phone + "?text=" + encodeURIComponent(msg);
+
+        toast("💬 Abriendo WhatsApp…");
+        window.open(url, "_blank", "noopener,noreferrer");
       });
     }
 
@@ -998,35 +1036,8 @@ cuidarte con amor… y elegirnos para siempre.`;
       setTimeout(()=> holder.innerHTML="", 2600);
     }
 
-    // Toast
-    let toastTimer = null;
-    function toast(text){
-      let el = document.getElementById("toast");
-      if(!el){
-        el = document.createElement("div");
-        el.id="toast";
-        el.style.position="fixed";
-        el.style.left="50%";
-        el.style.bottom="18px";
-        el.style.transform="translateX(-50%)";
-        el.style.background="rgba(0,0,0,.72)";
-        el.style.color="white";
-        el.style.padding="10px 14px";
-        el.style.borderRadius="999px";
-        el.style.fontWeight="800";
-        el.style.fontSize="13px";
-        el.style.zIndex="2000";
-        el.style.boxShadow="0 10px 25px rgba(0,0,0,.22)";
-        document.body.appendChild(el);
-      }
-      el.textContent = text;
-      el.style.opacity="1";
-      clearTimeout(toastTimer);
-      toastTimer = setTimeout(()=> el.style.opacity="0", 1400);
-    }
-
-    // ✅ CONTADOR (29/06/2023) — años, días, horas, minutos, segundos
-    const startDate = new Date(2023, 5, 29, 0, 0, 0); // mes 5 = junio
+    // ✅ CONTADOR (29/06/2023)
+    const startDate = new Date(2023, 5, 29, 0, 0, 0); // junio=5
 
     const elYears = document.getElementById("cYears");
     const elDays  = document.getElementById("cDays");
@@ -1039,14 +1050,11 @@ cuidarte con amor… y elegirnos para siempre.`;
     function updateCounter(){
       const now = new Date();
 
-      // años completos
       let years = now.getFullYear() - startDate.getFullYear();
       const annivThisYear = new Date(startDate);
       annivThisYear.setFullYear(startDate.getFullYear() + years);
 
-      if(now < annivThisYear){
-        years--;
-      }
+      if(now < annivThisYear){ years--; }
 
       const anchor = new Date(startDate);
       anchor.setFullYear(startDate.getFullYear() + years);

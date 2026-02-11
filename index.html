@@ -600,19 +600,20 @@
           <h1 class="title">Massiel… <br>mi mundo eres tú ✨</h1>
 
           <p class="subtitle">
-  Esta página es un recordatorio bonito:
-  <strong>yo te elijo a ti</strong>… hoy, mañana y siempre. 💗
-  No importa lo que pase, ni los días difíciles:
-  mi decisión sigue siendo la misma—<strong>solo tú</strong>.
-  Y quiero que lo sientas en lo más importante:
-  <strong>en mis acciones, en mi tiempo y en mi forma de cuidarte</strong>.
-</p>
+            Esta página es un recordatorio bonito:
+            <strong>yo te elijo a ti</strong>… hoy, mañana y siempre. 💗
+            No importa lo que pase, ni los días difíciles:
+            mi decisión sigue siendo la misma—<strong>solo tú</strong>.
+            Y quiero que lo sientas en lo más importante:
+            <strong>en mis acciones, en mi tiempo y en mi forma de cuidarte</strong>.
+          </p>
 
           <div class="callout">
-  <strong>Promesa bonita:</strong> elegirme contigo en las buenas y en las difíciles.
-  Ser tu paz, tu apoyo y tu lugar seguro.
-  Que lo nuestro no se rinda: que se cuide, que crezca… y que se quede. 💞
-</div>
+            <strong>Promesa bonita:</strong> elegirme contigo en las buenas y en las difíciles.
+            Ser tu paz, tu apoyo y tu lugar seguro.
+            Que lo nuestro no se rinda: que se cuide, que crezca… y que se quede. 💞
+          </div>
+
           <div class="pillRow">
             <div class="pill">ELEGIRNOS SIEMPRE</div>
             <div class="pill">SANAR DESPACITO</div>
@@ -706,7 +707,7 @@
   </div>
 
   <!-- Audio -->
-  <audio id="bgm" src="./massiel-mi-vida.mp3" preload="auto" loop></audio>
+  <audio id="bgm" src="./massiel-mi-vida.mp3" preload="auto" loop playsinline></audio>
   <div class="confetti" id="confetti" aria-hidden="true"></div>
 
   <script>
@@ -755,50 +756,78 @@
       toastTimer = setTimeout(()=> el.style.opacity="0", 1600);
     }
 
-    // Audio controls (más robusto)
+    // ===== AUDIO (arreglo definitivo) =====
     const audio = document.getElementById("bgm");
-    audio.volume = 0.75;
+    audio.volume = 0.85;
+
     let musicOn = false;
+    let unlocked = false;
+
+    function setMusicLabel(){
+      const btn = document.getElementById("musicBtn");
+      if(btn) btn.textContent = musicOn ? "🔊 Música: ON" : "🔊 Música: OFF";
+    }
 
     audio.addEventListener("error", () => {
       toast("⚠️ No se encontró la música. Revisa: massiel-mi-vida.mp3");
     });
 
-    async function tryPlay(){
+    async function playMusic(){
       try{
         await audio.play();
         musicOn = true;
-        const btn = document.getElementById("musicBtn");
-        if(btn) btn.textContent = "🔊 Música: ON";
+        setMusicLabel();
         return true;
       }catch(e){
-        // el navegador bloquea autoplay; se arregla con un clic
+        musicOn = false;
+        setMusicLabel();
         return false;
       }
     }
+
     function pauseMusic(){
       audio.pause();
       musicOn = false;
-      const btn = document.getElementById("musicBtn");
-      if(btn) btn.textContent = "🔊 Música: OFF";
+      setMusicLabel();
     }
 
-    // ✅ intento automático en el PRIMER toque/clic en cualquier parte
-    let firstGestureDone = false;
-    async function onFirstGesture(){
-      if(firstGestureDone) return;
-      firstGestureDone = true;
-      const ok = await tryPlay();
-      if(!ok){
-        toast("🔊 Toca el botón de música para activar");
-      }
-      window.removeEventListener("pointerdown", onFirstGesture);
-      window.removeEventListener("keydown", onFirstGesture);
-    }
-    window.addEventListener("pointerdown", onFirstGesture, { once:false });
-    window.addEventListener("keydown", onFirstGesture, { once:false });
+    async function unlockAndPlay(){
+      if(unlocked) return;
+      unlocked = true;
 
-    // ✅ LETRA SIN [Intro], [Verse], etc. y sin “...”
+      const ok = await playMusic();
+      if(!ok) toast("🔊 Toca el botón “Música” para activarla");
+
+      window.removeEventListener("pointerdown", unlockAndPlay);
+      window.removeEventListener("click", unlockAndPlay);
+      window.removeEventListener("touchstart", unlockAndPlay);
+      window.removeEventListener("keydown", unlockAndPlay);
+    }
+
+    // desbloquea audio con el primer gesto (móvil/PC)
+    window.addEventListener("pointerdown", unlockAndPlay, { passive:true });
+    window.addEventListener("click", unlockAndPlay, { passive:true });
+    window.addEventListener("touchstart", unlockAndPlay, { passive:true });
+    window.addEventListener("keydown", unlockAndPlay);
+
+    // Botones audio
+    const musicBtn = document.getElementById("musicBtn");
+    const pauseBtn = document.getElementById("pauseBtn");
+
+    if(musicBtn){
+      musicBtn.addEventListener("click", async () => {
+        if(musicOn) pauseMusic();
+        else{
+          const ok = await playMusic();
+          if(!ok) toast("⚠️ No se pudo reproducir. Revisa el mp3.");
+        }
+      });
+    }
+    if(pauseBtn) pauseBtn.addEventListener("click", pauseMusic);
+
+    setMusicLabel();
+
+    // ✅ LETRA (sin [Intro], [Verse], etc.)
     const LYRICS = `Massiel… mi vida…
 
 Yo sé que hubo momentos donde no estuve,
@@ -866,16 +895,36 @@ Massiel… yo te elijo… una y otra vez, sin final.
 Y si me das la mano… te prometo algo simple:
 cuidarte con amor… y elegirnos para siempre.`;
 
+    // MODAL LETRA
+    const lyricsModal = document.getElementById("lyricsModal");
+    const lyricsBox   = document.getElementById("lyricsBox");
+    const closeLyrics = document.getElementById("closeLyrics");
+    const lyricsBtn   = document.getElementById("lyricsBtn");
+    const lyricsBtn2  = document.getElementById("lyricsBtn2");
+
+    lyricsBox.textContent = LYRICS;
+
+    function openLyrics(){
+      lyricsModal.style.display = "flex";
+      lyricsModal.setAttribute("aria-hidden","false");
+      // gesto de abrir: intenta sonar
+      playMusic();
+    }
+    function closeLyricsFn(){
+      lyricsModal.style.display = "none";
+      lyricsModal.setAttribute("aria-hidden","true");
+    }
+    if(lyricsBtn)  lyricsBtn.addEventListener("click", openLyrics);
+    if(lyricsBtn2) lyricsBtn2.addEventListener("click", openLyrics);
+    if(closeLyrics) closeLyrics.addEventListener("click", closeLyricsFn);
+    lyricsModal.addEventListener("click", (e) => {
+      if(e.target === lyricsModal) closeLyricsFn();
+    });
+
     // STORY SLIDES
     const slides = [
-      {
-        img:"fotos01.jpg",
-        text:"🏃‍♂️🏃‍♀️ Nuestro segundo Ultra 💪✨\nDiversión, esfuerzo y nosotros.\nContigo, todo se siente posible… y mi lugar es a tu lado. 💗"
-      },
-      {
-        img:"fotos02.jpg",
-        text:"🏫💞 Me acompañaste a una promoción del cole\nGracias por apoyarme y caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶"
-      },
+      { img:"fotos01.jpg", text:"🏃‍♂️🏃‍♀️ Nuestro segundo Ultra 💪✨\nDiversión, esfuerzo y nosotros.\nContigo, todo se siente posible… y mi lugar es a tu lado. 💗" },
+      { img:"fotos02.jpg", text:"🏫💞 Me acompañaste a una promoción del cole\nGracias por apoyarme y caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶" },
       { img:"fotos03.jpg", text:"🎄🌟 Navidad en la plaza de Caraz\nQué bonito se siente cuando la magia no está en las luces…\nestá en ti. ✨💗" },
       { img:"fotos04.jpg", text:"🥂✨ Cena de Año Nuevo 🎆\nUn año más… y mi deseo sigue siendo el mismo:\nseguir eligiéndote, con más amor y más verdad. 💞" },
       { img:"fotos05.jpg", text:"🌿😄 Recreo campestre\nRisas, aire libre y tus ojitos.\nAsí se ve la felicidad cuando es contigo. 🤍" },
@@ -933,12 +982,17 @@ cuidarte con amor… y elegirnos para siempre.`;
     function finishStory(){
       story.style.display = "none";
       mainWrap.style.display = "flex";
-      // aquí ya hay interacción, debería sonar
-      tryPlay();
+      // ya hubo interacción: intenta sonar
+      playMusic();
     }
 
-    prevBtn.addEventListener("click", () => { if(idx > 0){ idx--; render(); } });
-    nextBtn.addEventListener("click", () => {
+    prevBtn.addEventListener("click", async () => {
+      await playMusic();
+      if(idx > 0){ idx--; render(); }
+    });
+
+    nextBtn.addEventListener("click", async () => {
+      await playMusic();
       if(idx < slides.length - 1){
         idx++; render();
       }else{
@@ -948,66 +1002,29 @@ cuidarte con amor… y elegirnos para siempre.`;
     });
 
     // MAIN BUTTONS
-    const musicBtn = document.getElementById("musicBtn");
-    const pauseBtn = document.getElementById("pauseBtn");
-    const yesBtn   = document.getElementById("yesBtn");
-    const hugBtn   = document.getElementById("hugBtn");
-
-    if(musicBtn){
-      musicBtn.addEventListener("click", async () => {
-        if(musicOn) pauseMusic();
-        else {
-          const ok = await tryPlay();
-          if(!ok) toast("🔊 El navegador bloqueó la música. Intenta otra vez.");
-        }
-      });
-    }
-    if(pauseBtn) pauseBtn.addEventListener("click", pauseMusic);
+    const yesBtn = document.getElementById("yesBtn");
+    const hugBtn = document.getElementById("hugBtn");
 
     if(hugBtn){
       hugBtn.addEventListener("click", async () => {
-        await tryPlay();
+        await playMusic();
         toast("🤍 Abracito enviado");
       });
     }
 
     if(yesBtn){
       yesBtn.addEventListener("click", async () => {
-        await tryPlay();
+        await playMusic();
         confettiPop();
         toast("💘 ¡Qué lindo! 💚");
       });
     }
 
-    // MODAL LETRA
-    const lyricsModal = document.getElementById("lyricsModal");
-    const lyricsBox   = document.getElementById("lyricsBox");
-    const closeLyrics = document.getElementById("closeLyrics");
-    const lyricsBtn   = document.getElementById("lyricsBtn");
-    const lyricsBtn2  = document.getElementById("lyricsBtn2");
-
-    lyricsBox.textContent = LYRICS;
-
-    function openLyrics(){
-      lyricsModal.style.display = "flex";
-      lyricsModal.setAttribute("aria-hidden","false");
-    }
-    function closeLyricsFn(){
-      lyricsModal.style.display = "none";
-      lyricsModal.setAttribute("aria-hidden","true");
-    }
-    if(lyricsBtn)  lyricsBtn.addEventListener("click", openLyrics);
-    if(lyricsBtn2) lyricsBtn2.addEventListener("click", openLyrics);
-    if(closeLyrics) closeLyrics.addEventListener("click", closeLyricsFn);
-    lyricsModal.addEventListener("click", (e) => {
-      if(e.target === lyricsModal) closeLyricsFn();
-    });
-
     // ✅ WhatsApp button
     const waBtn = document.getElementById("waBtn");
     if(waBtn){
       waBtn.addEventListener("click", async () => {
-        await tryPlay();
+        await playMusic();
         confettiPop();
 
         const phone = "51982690642"; // +51 Perú

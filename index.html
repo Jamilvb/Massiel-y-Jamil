@@ -324,7 +324,7 @@
     .waBtn:hover{ transform: translateY(-1px); }
     .waBtn:active{ transform: translateY(1px); }
 
-    /* ===== STORY OVERLAY (sin recorte) ===== */
+    /* ===== STORY OVERLAY (corregido: barra simple + scroll) ===== */
     .storyOverlay{
       position: fixed;
       inset: 0;
@@ -335,80 +335,84 @@
       padding: 18px;
       background: rgba(0,0,0,.50);
     }
-
-    /* ✅ FIX 1: CARD con alto controlado para que nunca “empuje” botones */
     .storyCard{
       width: min(780px, 100%);
-      height: min(92vh, 760px);          /* <- clave */
-      display:flex;
-      flex-direction:column;
       background: rgba(255,255,255,.96);
       border-radius: 24px;
       box-shadow: 0 24px 80px rgba(0,0,0,.35);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.55);
-    }
 
-    /* ✅ FIX 2: TOP más compacto (ya no se ve avultado) */
+      /* ✅ Para que NO desaparezcan botones con textos largos */
+      max-height: 92vh;
+      display: flex;
+      flex-direction: column;
+    }
     .storyTop{
-      display:grid;
-      grid-template-columns: auto 1fr;
+      display:flex;
       align-items:center;
+      justify-content:space-between;
       gap:10px;
-      padding: 8px 10px;                /* <- antes 12 14 */
+      padding: 12px 14px;
       background: linear-gradient(90deg, rgba(255,94,168,.16), rgba(122,60,255,.12));
       border-bottom: 1px solid rgba(0,0,0,.06);
+      flex: 0 0 auto;
     }
     .storyTitle{
       font-weight: 900;
       color: #2a1f55;
-      font-size: 13px;                  /* <- antes 14 */
+      font-size: 14px;
       white-space:nowrap;
     }
-
-    /* ✅ progreso compacto + sin wrap (no crece hacia abajo) */
-    .progress{
+    /* ✅ Antes se abultaba por 60 barritas. Ahora: contador + 1 barra */
+    .progressWrap{
       display:flex;
-      gap:4px;                          /* <- antes 6 */
-      justify-content:flex-end;
       align-items:center;
-      flex-wrap:nowrap;                 /* <- clave */
-      overflow-x:auto;                  /* <- si son muchos, se “corre” */
-      scrollbar-width:none;
-      -ms-overflow-style:none;
+      gap:10px;
+      justify-content:flex-end;
+      flex: 1;
     }
-    .progress::-webkit-scrollbar{ display:none; }
-
-    .bar{
-      width: 14px;                      /* <- antes 18 */
-      height: 4px;                      /* <- antes 6 */
-      border-radius: 99px;
+    .storyCount{
+      font-size:12px;
+      font-weight:900;
+      color: var(--muted);
+      background: rgba(0,0,0,.05);
+      border: 1px solid rgba(0,0,0,.08);
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space:nowrap;
+    }
+    .progressTrack{
+      width: min(260px, 40vw);
+      height: 8px;
+      border-radius: 999px;
       background: rgba(0,0,0,.12);
       overflow:hidden;
-      flex: 0 0 auto;
+      border: 1px solid rgba(0,0,0,.08);
     }
-    .bar > span{
+    .progressFill{
       display:block;
       height:100%;
       width:0%;
       background: linear-gradient(90deg, var(--primary), var(--primary2));
-      border-radius: 99px;
+      border-radius: 999px;
+      transition: width .18s ease;
     }
 
-    /* ✅ FIX 3: BODY scrollable */
     .storyBody{
-      padding: 12px;
-      display:flex;
-      flex-direction:column;
-      gap: 10px;
-      flex: 1;
-      overflow:hidden;                  /* contenido interno controla scroll */
-      min-height: 0;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+
+      /* ✅ scroll interno */
+      flex: 1 1 auto;
+      overflow: auto;
     }
 
     .storyMedia{
       width:100%;
-      height: min(420px, 48vh);
+      height: min(440px, 52vh);
       border-radius: 18px;
       background: linear-gradient(135deg, rgba(255,94,168,.28), rgba(122,60,255,.22));
       border: 1px solid rgba(0,0,0,.06);
@@ -417,8 +421,8 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      flex: 0 0 auto;
     }
+    /* ✅ sin recorte: contain */
     .storyMedia img{
       width:100%;
       height:100%;
@@ -430,7 +434,6 @@
     }
     .storyMedia img.show{ opacity: 1; }
 
-    /* ✅ FIX 4: TEXTO con scroll interno (para textos largos) */
     .storyText{
       background: rgba(255,255,255,.88);
       border:1px solid rgba(0,0,0,.06);
@@ -440,28 +443,20 @@
       line-height:1.6;
       font-size: 15px;
       white-space: pre-line;
-
-      flex: 1;                          /* ocupa lo que queda */
-      overflow:auto;                    /* <- clave */
-      min-height: 0;
-      -webkit-overflow-scrolling: touch;
     }
 
-    /* ✅ FIX 5: BOTONES siempre visibles (sticky dentro de la card) */
     .storyActions{
       display:flex;
       gap:10px;
       justify-content:space-between;
       align-items:center;
-      padding: 12px 14px 14px;
+      padding: 12px 14px 16px;
       border-top: 1px solid rgba(0,0,0,.06);
       background: rgba(255,255,255,.92);
 
-      position: sticky;
-      bottom: 0;
-      z-index: 5;
+      /* ✅ siempre visible */
+      flex: 0 0 auto;
     }
-
     .navBtn{
       appearance:none;
       border:none;
@@ -471,7 +466,6 @@
       border-radius: 16px;
       transition: transform .12s ease, filter .12s ease;
       user-select:none;
-      flex: 0 0 auto;
     }
     .navBtn:active{ transform: translateY(1px); }
     .navBtn:disabled{ cursor:not-allowed; filter: grayscale(.2); }
@@ -485,15 +479,6 @@
       background: linear-gradient(135deg, var(--primary), var(--primary2));
       color: #fff;
       box-shadow: 0 12px 24px rgba(255,46,134,.18);
-    }
-
-    /* 🔧 Ajuste extra para pantallas pequeñas */
-    @media (max-width: 480px){
-      .storyOverlay{ padding: 10px; }
-      .storyCard{ height: 94vh; }
-      .storyMedia{ height: 44vh; }
-      .storyText{ font-size: 14px; }
-      .navBtn{ padding: 11px 12px; }
     }
 
     /* ===== MODAL LETRA ===== */
@@ -592,7 +577,14 @@
     <div class="storyCard">
       <div class="storyTop">
         <div class="storyTitle" id="storyTitle">💗 Massiel… esto es para ti</div>
-        <div class="progress" id="progress"></div>
+
+        <!-- ✅ contador + barra simple -->
+        <div class="progressWrap">
+          <div class="storyCount" id="storyCount">1/60</div>
+          <div class="progressTrack" aria-hidden="true">
+            <span class="progressFill" id="progressFill"></span>
+          </div>
+        </div>
       </div>
 
       <div class="storyBody">
@@ -875,7 +867,7 @@
 
     setMusicLabel();
 
-    // ✅ LETRA (sin [Intro], [Verse], etc.)
+    // ✅ LETRA
     const LYRICS = `Massiel… mi vida…
 
 Yo sé que hubo momentos donde no estuve,
@@ -898,29 +890,6 @@ Que mi amor se note en cómo te cuido también,
 en cómo te escucho, en cómo te sostengo bien.
 Volver a elegirnos y volver a empezar,
 con más firmeza, con más calma, con más paz.
-Porque tú eres mi reyna, mi vida, mi hogar,
-y yo quiero ser el hombre que tú mereces de verdad.
-
-Y me acuerdo clarito: cinco de febrero,
-dos mil veinticuatro… nuestro primer “nosotros” entero.
-Lima fue testigo de mi corazón al límite,
-porque ibas a mi lado y todo se sintió posible.
-Parque de las Leyendas, la playa y el agua en la piel,
-Costa Verde, risas… y yo mirándote así: “mi mundo eres tú”.
-Tantas aventuras… y yo pensando en silencio:
-Si esto es un sueño, que dure el resto del tiempo.
-
-Y hoy lo tengo claro, no lo voy a soltar,
-porque cuando eres tú… todo tiene lugar.
-No solo decir “sí”, sino demostrar:
-que contigo me quedo… y voy a cuidar.
-
-Volver a elegirnos, con más amor y más paciencia,
-sanar despacito, sin promesas vacías.
-Que mi amor se note en cómo te cuido también,
-en cómo te respeto, en cómo te abrazo bien.
-Volver a elegirnos y volver a empezar,
-con más firmeza, con más tiempo, con más paz.
 Porque tú eres mi reyna, mi vida, mi hogar,
 y yo quiero ser el hombre que tú mereces de verdad.
 
@@ -968,18 +937,75 @@ cuidarte con amor… y elegirnos para siempre.`;
       if(e.target === lyricsModal) closeLyricsFn();
     });
 
-    // STORY SLIDES
+    // =========================
+    // ✅ STORY SLIDES (60 fotos)
+    // =========================
     const slides = [
       { img:"fotos01.jpg", text:"🏃‍♂️🏃‍♀️ Nuestro segundo Ultra 💪✨\nDiversión, esfuerzo y nosotros.\nContigo, todo se siente posible… y mi lugar es a tu lado. 💗" },
-      { img:"fotos02.jpg", text:"🏫💞 Me acompañaste a una promoción del cole\nGracias por apoyarme y caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶" },
-      { img:"fotos03.jpg", text:"🎄🌟 Navidad en la plaza de Caraz\nQué bonito se siente cuando la magia no está en las luces…\nestá en ti. ✨💗" },
-      { img:"fotos04.jpg", text:"🥂✨ Cena de Año Nuevo 🎆\nUn año más… y mi deseo sigue siendo el mismo:\nseguir eligiéndote, con más amor y más verdad. 💞" },
-      { img:"fotos05.jpg", text:"🌿😄 Recreo campestre\nRisas, aire libre y tus ojitos.\nAsí se ve la felicidad cuando es contigo. 🤍" },
+      { img:"fotos02.jpg", text:"🏫💞 Me acompañaste a una promo del cole\nGracias por caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶" },
+      { img:"fotos03.jpg", text:"🎄🌟 Navidad en la plaza de Caraz\nQué bonito se siente cuando la magia no está en las luces…\nestá en nosotros. ✨💗" },
+      { img:"fotos04.jpg", text:"🥂✨ Cena de Año Nuevo 🎆\nUn año más… y mi deseo sigue siendo el mismo:\nseguir eligiéndonos, con más amor y más verdad. 💞" },
+      { img:"fotos05.jpg", text:"🌿😄 Recreo campestre\nRisas, aire libre y nosotros.\nAsí se ve la felicidad cuando es contigo. 🤍" },
       { img:"fotos06.jpg", text:"🏞️💙 Laguna Radian\nQué paz… qué calma.\nY qué suerte la mía de tenerte cerquita. ✨" },
       { img:"fotos07.jpg", text:"🌊☀️ Paseo a la playa\nEl mar es bonito…\npero tú haces que todo sea más bonito. 💗" },
-      { img:"fotos08.jpg", text:"🕺💃✨ Nuestra primera salida a la discoteca en Lima\nUna aventura que nunca olvido.\nPorque lo mejor… fue compartirla contigo. 😍" },
-      { img:"fotos09.jpg", text:"🍳🏠💞 Primera vez cocinando en tu casa\nNuevos giros, nuevos momentos.\nContigo, hasta lo simple se vuelve especial. 🫶" },
-      { img:"fotos10.jpg", text:"🏞️💫 Laguna Radian\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗" }
+      { img:"fotos08.jpg", text:"🕺💃✨ Nuestra salida en Lima\nUna aventura que nunca olvido.\nPorque lo mejor… fue vivirla contigo. 😍" },
+      { img:"fotos09.jpg", text:"🍳🏠💞 Cocinando juntitos\nContigo, hasta lo simple se vuelve especial.\nY yo amo eso de nosotros. 🫶" },
+      { img:"fotos10.jpg", text:"🏞️💫 Laguna Radian\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗" },
+
+      { img:"fotos11.jpg", text:"🍽️💛 Una mesa, un momento… y nosotros.\nMe encanta cuando compartimos comida, risas y tranquilidad.\nAsí se siente hogar. 🏡✨" },
+      { img:"fotos12.jpg", text:"🧩✨ Un pedacito de ese día.\nA veces no hace falta un lugar perfecto…\nsi estamos nosotros. 💗" },
+      { img:"fotos13.jpg", text:"🍦💞 Un brindis de heladito\nPor los detalles sencillos…\nque contigo se vuelven recuerdos enormes. 🫶✨" },
+      { img:"fotos14.jpg", text:"🚪✨ Entre risas y compañía\nMe gusta vernos rodeados de buena vibra.\nPorque nosotros también somos luz para los demás. 💛" },
+      { img:"fotos15.jpg", text:"🤍📸 Un día cualquiera…\npero contigo se vuelve especial.\nNuestro amor no necesita escándalo: se nota. 💗" },
+      { img:"fotos16.jpg", text:"👨‍👩‍👧💞 Momentos que abrazan\nAmo cuando compartimos con los que queremos.\nNos hace valorar más lo simple. ✨" },
+      { img:"fotos17.jpg", text:"🌮🍹 Una mesa llena y un corazón tranquilo\nMe encanta mirarte y pensar:\n“sí… esto es lo que quiero cuidar”. 💗" },
+      { img:"fotos18.jpg", text:"🏙️✨ Caminando entre gente y luces\nY aun así… yo solo te veía a ti.\nNosotros en nuestro mundo. 💞" },
+      { img:"fotos19.jpg", text:"👨‍👩‍👧🌿 Un momento familiar\nDe esos que no se repiten igual.\nY yo agradezco vivirlos contigo. 🤍" },
+      { img:"fotos20.jpg", text:"⛰️💙 Paisaje bonito…\npero más bonito es tenerte a mi lado.\nNosotros y la vida. ✨" },
+
+      { img:"fotos21.jpg", text:"☕🍰 Una cita sencilla\nY aun así… mi parte favorita eres tú.\nNosotros, sin prisa. 💗" },
+      { img:"fotos22.jpg", text:"🎡✨ Plan de diversión\nMe encanta vernos así:\nriendo, jugando y disfrutando como niños. 😄💞" },
+      { img:"fotos23.jpg", text:"🛣️💞 Un viaje más\nY mi destino favorito sigue siendo el mismo:\nllegar contigo. ✨" },
+      { img:"fotos24.jpg", text:"🪞📸 Un reflejo de nosotros\nCuando te miro, recuerdo por qué vale la pena.\nPorque tú sí. 💗" },
+      { img:"fotos25.jpg", text:"🧥✨ Salidita juntos\nMe gusta cuando combinamos planes y sonrisas.\nNosotros, siendo equipo. 🤝💞" },
+      { img:"fotos26.jpg", text:"📝💛 Decisiones y pasos\nLo bonito no es solo soñar…\nes caminarlo contigo. 🫶✨" },
+      { img:"fotos27.jpg", text:"🪞🤍 Un momentito en el espejo\nY yo pensando:\n“qué suerte tengo de llamarte mi amor”. 💗" },
+      { img:"fotos28.jpg", text:"😘💞 Un besito que dice todo\nSin tantas palabras.\nPorque nosotros hablamos con el corazón. ✨" },
+      { img:"fotos29.jpg", text:"🌙✨ Una noche cualquiera\npero con nosotros se vuelve historia.\nTe elijo incluso en lo cotidiano. 💗" },
+      { img:"fotos30.jpg", text:"🌃🫶 Salida nocturna\nMe encanta vernos así:\ntranquilos… y juntitos. 💞" },
+
+      { img:"fotos31.jpg", text:"🎉💙 Un día importante\nVerte a mi lado me da fuerzas.\nNosotros celebrando la vida. ✨" },
+      { img:"fotos32.jpg", text:"👨‍👩‍👧‍👦🤍 Juntitos en familia\nEstos momentos valen oro.\nY contigo… valen más. 💗" },
+      { img:"fotos33.jpg", text:"😄💞 Risas sin filtro\nDe esas que nacen cuando hay confianza.\nAsí se siente nuestro amor. ✨" },
+      { img:"fotos34.jpg", text:"✨📸 Una noche bonita\nYo no necesito mucho…\nsi te tengo a ti. 💗" },
+      { img:"fotos35.jpg", text:"🍽️💛 Comidita y compañía\nAmo compartir contigo.\nPorque en tu lado todo sabe mejor. 😋💞" },
+      { img:"fotos36.jpg", text:"😘🤍 Un gesto chiquito\nque para mí es gigante.\nPorque contigo me siento en casa. 🏡✨" },
+      { img:"fotos37.jpg", text:"😚💞 Nuestro lado loquito\nMe encanta vernos así:\nsin miedo al ridículo, solo felices. 😂✨" },
+      { img:"fotos38.jpg", text:"♨️💙 Un respiro para el alma\nQué rico es pausar la vida…\ny quedarnos nosotros. ✨" },
+      { img:"fotos39.jpg", text:"😎☀️ Plan relax\nTú, yo… y la sensación de que todo está bien.\nEso es amor. 💗" },
+      { img:"fotos40.jpg", text:"🤍🫶 Momentos de cuidado\nDe esos donde uno entiende:\nel amor se demuestra estando. ✨" },
+
+      { img:"fotos41.jpg", text:"💞📸 Otra fotito de nosotros\nY yo sigo pensando lo mismo:\nme encantas. 😍✨" },
+      { img:"fotos42.jpg", text:"🌙💗 Una noche cerquita\nY aunque el mundo esté duro…\nnosotros podemos con todo. 🫶" },
+      { img:"fotos43.jpg", text:"☕🤍 Un cafecito y tú\nPequeños planes.\nGrandes recuerdos. ✨💞" },
+      { img:"fotos44.jpg", text:"🌳💛 Sentados, tranquilos\nA veces la vida se siente perfecta\ncuando solo estamos nosotros. 💗" },
+      { img:"fotos45.jpg", text:"🧣🍃 Un día fresco\nPero tu compañía calienta todo.\nNosotros, siempre. 💞" },
+      { img:"fotos46.jpg", text:"🏠🤍 Una tarde en casita\nAmo esos momentos donde no hacemos “nada”…\npero lo tenemos todo. ✨" },
+      { img:"fotos47.jpg", text:"💙✨ Nochecita con luces\nY nosotros ahí…\ncomo si el mundo no existiera. 💗" },
+      { img:"fotos48.jpg", text:"🌾👨‍👩‍👧 Un día en el campo\nRespirar, caminar, reír.\nGracias por vivirlo conmigo. 🤍✨" },
+      { img:"fotos49.jpg", text:"⛰️💞 Vista hermosa\nPero nada se compara\ncon verte sonreír a mi lado. ✨" },
+      { img:"fotos50.jpg", text:"🎭💛 Un momento especial\nMe encanta vernos cumpliendo etapas.\nNosotros avanzando. 🫶✨" },
+
+      { img:"fotos51.jpg", text:"🤍📸 Cerquita de ti\nYo solo quiero eso:\npaz, amor… y nosotros. 💗" },
+      { img:"fotos52.jpg", text:"🍷✨ Una noche bonita\nEntre luces, charla y miradas.\nNosotros disfrutando sin prisa. 💞" },
+      { img:"fotos53.jpg", text:"💃🕺✨ Selfie con vibra\nMe gusta cuando salimos\ny el mundo se siente más bonito. 💗" },
+      { img:"fotos54.jpg", text:"🪞🤍 Un abrazo que se queda\nMe encanta abrazarte por detrás\nporque ahí siento: “aquí pertenezco”. 💞" },
+      { img:"fotos55.jpg", text:"🍽️💛 Un almuerzo juntos\nGracias por compartir tu tiempo conmigo.\nNosotros construyendo bonito. ✨" },
+      { img:"fotos56.jpg", text:"🪞💞 Otra fotito abrazados\nYo amo este tipo de momentos:\nsin ruido… solo nosotros. 🤍" },
+      { img:"fotos57.jpg", text:"😎💗 Complicidad\nTú y yo entendiendo todo\nsin decir demasiado. ✨" },
+      { img:"fotos58.jpg", text:"🤵‍♂️💞 Un día formal\nY aun así… lo más lindo\nes que estamos nosotros. ✨" },
+      { img:"fotos59.jpg", text:"🌿🎠 Un ratito de calma\nMe encanta vernos así:\ncomo dos niños felices en la vida. 😄💞" },
+      { img:"fotos60.jpg", text:"Hoy entendí que la vida no solo se trata de correr,\ntrabajar o alcanzar metas… también se trata de sostener\nlo más frágil y sagrado con las manos, con el alma\ny con el corazón 🥺🤍👶✨.\n\nUn bebé es un milagro silencioso: llega sin palabras,\npero cambia todo. Te enseña paciencia, ternura,\nvalentía… y te recuerda que el amor verdadero\nno se presume: se cuida. 💗\n\nY cuando lo miras, sientes algo que no se explica…\ncomo si la vida te dijera:\n“aquí está una razón nueva para hacerlo todo mejor” 🙏✨.\n\nOjalá que Dios siempre lo proteja,\nque crezca rodeado de paz, salud y amor.\nY que nosotros nunca olvidemos esto:\nlo más bonito del mundo… es cuidar. 🤍" }
     ];
 
     // STORY PLAYER
@@ -987,24 +1013,14 @@ cuidarte con amor… y elegirnos para siempre.`;
     const mainWrap = document.getElementById("mainWrap");
     const storyImg = document.getElementById("storyImg");
     const storyText = document.getElementById("storyText");
-    const progress = document.getElementById("progress");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
-    const storyTitle = document.getElementById("storyTitle");
+
+    // ✅ barra simple
+    const storyCount = document.getElementById("storyCount");
+    const progressFill = document.getElementById("progressFill");
 
     let idx = 0;
-
-    function buildProgress(){
-      progress.innerHTML = "";
-      for(let i=0;i<slides.length;i++){
-        const b = document.createElement("div");
-        b.className = "bar";
-        const s = document.createElement("span");
-        s.style.width = (i < idx ? "100%" : (i === idx ? "55%" : "0%"));
-        b.appendChild(s);
-        progress.appendChild(b);
-      }
-    }
 
     function setImage(src){
       storyImg.classList.remove("show");
@@ -1016,29 +1032,19 @@ cuidarte con amor… y elegirnos para siempre.`;
       };
     }
 
-    function fixText(t){
-      // ✅ Cambia “ustedes” -> “nosotros” (por si en algún slide quedó)
-      return (t || "").replace(/\bustedes\b/gi, "nosotros");
-    }
-
     function render(){
       const slide = slides[idx];
-      buildProgress();
+
+      // ✅ contador + barra
+      if(storyCount) storyCount.textContent = `${idx+1}/${slides.length}`;
+      if(progressFill) progressFill.style.width = `${((idx+1)/slides.length)*100}%`;
+
       setImage(slide.img);
-
-      // ✅ título tipo (1/60) automático según cantidad de slides
-      if(storyTitle){
-        storyTitle.textContent = `💗 Massiel… esto es para ti (${idx+1}/${slides.length})`;
-      }
-
-      storyText.textContent = fixText(slide.text);
+      storyText.textContent = slide.text;
 
       prevBtn.disabled = idx === 0;
       prevBtn.style.opacity = idx === 0 ? ".55" : "1";
       nextBtn.textContent = (idx === slides.length - 1) ? "Finalizar ✨" : "Siguiente ➜";
-
-      // ✅ si el texto era largo y hiciste scroll, vuelve arriba al cambiar slide
-      storyText.scrollTop = 0;
     }
 
     function finishStory(){
@@ -1119,7 +1125,6 @@ cuidarte con amor… y elegirnos para siempre.`;
 
     // ✅ CONTADOR (29/06/2023)
     const startDate = new Date(2023, 5, 29, 0, 0, 0); // junio=5
-
     const elYears = document.getElementById("cYears");
     const elDays  = document.getElementById("cDays");
     const elHours = document.getElementById("cHours");

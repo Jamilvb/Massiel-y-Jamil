@@ -324,7 +324,7 @@
     .waBtn:hover{ transform: translateY(-1px); }
     .waBtn:active{ transform: translateY(1px); }
 
-    /* ===== STORY OVERLAY (corregido: barra simple + scroll) ===== */
+    /* ===== STORY OVERLAY (corregido: barra simple + scroll + iOS fix) ===== */
     .storyOverlay{
       position: fixed;
       inset: 0;
@@ -343,10 +343,12 @@
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.55);
 
-      /* ✅ Para que NO desaparezcan botones con textos largos */
       max-height: 92vh;
       display: flex;
       flex-direction: column;
+
+      /* ✅ clave iOS: permite scroll interno sin tapar botones */
+      min-height: 0;
     }
     .storyTop{
       display:flex;
@@ -357,14 +359,21 @@
       background: linear-gradient(90deg, rgba(255,94,168,.16), rgba(122,60,255,.12));
       border-bottom: 1px solid rgba(0,0,0,.06);
       flex: 0 0 auto;
+
+      /* ✅ evita que “abulte” en móviles */
+      flex-wrap: nowrap;
     }
     .storyTitle{
       font-weight: 900;
       color: #2a1f55;
       font-size: 14px;
-      white-space:nowrap;
+
+      /* ✅ recorte elegante */
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 46vw;
     }
-    /* ✅ Antes se abultaba por 60 barritas. Ahora: contador + 1 barra */
     .progressWrap{
       display:flex;
       align-items:center;
@@ -405,9 +414,11 @@
       grid-template-columns: 1fr;
       gap: 12px;
 
-      /* ✅ scroll interno */
       flex: 1 1 auto;
       overflow: auto;
+
+      /* ✅ clave iOS */
+      min-height: 0;
     }
 
     .storyMedia{
@@ -422,7 +433,6 @@
       align-items:center;
       justify-content:center;
     }
-    /* ✅ sin recorte: contain */
     .storyMedia img{
       width:100%;
       height:100%;
@@ -453,8 +463,6 @@
       padding: 12px 14px 16px;
       border-top: 1px solid rgba(0,0,0,.06);
       background: rgba(255,255,255,.92);
-
-      /* ✅ siempre visible */
       flex: 0 0 auto;
     }
     .navBtn{
@@ -479,6 +487,14 @@
       background: linear-gradient(135deg, var(--primary), var(--primary2));
       color: #fff;
       box-shadow: 0 12px 24px rgba(255,46,134,.18);
+    }
+
+    /* ✅ Ajuste móvil extra (barra más corta y top más compacto) */
+    @media (max-width: 420px){
+      .progressTrack{ width: 150px !important; }
+      .storyCount{ font-size:11px; padding:5px 8px; }
+      .storyTop{ padding: 10px 12px; }
+      .storyTitle{ max-width: 42vw; }
     }
 
     /* ===== MODAL LETRA ===== */
@@ -578,7 +594,6 @@
       <div class="storyTop">
         <div class="storyTitle" id="storyTitle">💗 Massiel… esto es para ti</div>
 
-        <!-- ✅ contador + barra simple -->
         <div class="progressWrap">
           <div class="storyCount" id="storyCount">1/60</div>
           <div class="progressTrack" aria-hidden="true">
@@ -738,10 +753,10 @@
     </main>
   </div>
 
-  <!-- Audio (✅ ahora desde GitHub RAW) -->
+  <!-- Audio -->
   <audio
     id="bgm"
-    src="https://raw.githubusercontent.com/jamilvb/Massiel-y-Jamil/main/massiel-mi-vida.mp3?v=2"
+    src="https://raw.githubusercontent.com/jamilvb/Massiel-y-Jamil/main/massiel-mi-vida.mp3?v=3"
     preload="metadata"
     loop
     playsinline
@@ -844,13 +859,11 @@
       window.removeEventListener("keydown", unlockAndPlay);
     }
 
-    // desbloquea audio con el primer gesto (móvil/PC)
     window.addEventListener("pointerdown", unlockAndPlay, { passive:true });
     window.addEventListener("click", unlockAndPlay, { passive:true });
     window.addEventListener("touchstart", unlockAndPlay, { passive:true });
     window.addEventListener("keydown", unlockAndPlay);
 
-    // Botones audio
     const musicBtn = document.getElementById("musicBtn");
     const pauseBtn = document.getElementById("pauseBtn");
 
@@ -952,60 +965,61 @@ cuidarte con amor… y elegirnos para siempre.`;
       { img:"fotos09.jpg", text:"🍳🏠💞 Cocinando juntitos\nContigo, hasta lo simple se vuelve especial.\nY yo amo eso de nosotros. 🫶" },
       { img:"fotos10.jpg", text:"🏞️💫 Laguna Radian\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗" },
 
-      { img:"foto11.jpg", text:"🍽️💛 Una mesa, un momento… y nosotros.\nMe encanta cuando compartimos comida, risas y tranquilidad.\nAsí se siente hogar. 🏡✨" },
-      { img:"foto12.jpg", text:"🧩✨ Un pedacito de ese día.\nA veces no hace falta un lugar perfecto…\nsi estamos nosotros. 💗" },
-      { img:"foto13.jpg", text:"🍦💞 Un brindis de heladito\nPor los detalles sencillos…\nque contigo se vuelven recuerdos enormes. 🫶✨" },
-      { img:"foto14.jpg", text:"🚪✨ Entre risas y compañía\nMe gusta vernos rodeados de buena vibra.\nPorque nosotros también somos luz para los demás. 💛" },
-      { img:"foto15.jpg", text:"🤍📸 Un día cualquiera…\npero contigo se vuelve especial.\nNuestro amor no necesita escándalo: se nota. 💗" },
-      { img:"foto16.jpg", text:"👨‍👩‍👧💞 Momentos que abrazan\nAmo cuando compartimos con los que queremos.\nNos hace valorar más lo simple. ✨" },
-      { img:"foto17.jpg", text:"🌮🍹 Una mesa llena y un corazón tranquilo\nMe encanta mirarte y pensar:\n“sí… esto es lo que quiero cuidar”. 💗" },
-      { img:"foto18.jpg", text:"🏙️✨ Caminando entre gente y luces\nY aun así… yo solo te veía a ti.\nNosotros en nuestro mundo. 💞" },
-      { img:"foto19.jpg", text:"👨‍👩‍👧🌿 Un momento familiar\nDe esos que no se repiten igual.\nY yo agradezco vivirlos contigo. 🤍" },
-      { img:"foto20.jpg", text:"⛰️💙 Paisaje bonito…\npero más bonito es tenerte a mi lado.\nNosotros y la vida. ✨" },
+      /* ✅ del 11 al 60: en tu repo están como .jpeg */
+      { img:"foto11.jpeg", text:"🍽️💛 Una mesa, un momento… y nosotros.\nMe encanta cuando compartimos comida, risas y tranquilidad.\nAsí se siente hogar. 🏡✨" },
+      { img:"foto12.jpeg", text:"🧩✨ Un pedacito de ese día.\nA veces no hace falta un lugar perfecto…\nsi estamos nosotros. 💗" },
+      { img:"foto13.jpeg", text:"🍦💞 Un brindis de heladito\nPor los detalles sencillos…\nque contigo se vuelven recuerdos enormes. 🫶✨" },
+      { img:"foto14.jpeg", text:"🚪✨ Entre risas y compañía\nMe gusta vernos rodeados de buena vibra.\nPorque nosotros también somos luz para los demás. 💛" },
+      { img:"foto15.jpeg", text:"🤍📸 Un día cualquiera…\npero contigo se vuelve especial.\nNuestro amor no necesita escándalo: se nota. 💗" },
+      { img:"foto16.jpeg", text:"👨‍👩‍👧💞 Momentos que abrazan\nAmo cuando compartimos con los que queremos.\nNos hace valorar más lo simple. ✨" },
+      { img:"foto17.jpeg", text:"🌮🍹 Una mesa llena y un corazón tranquilo\nMe encanta mirarte y pensar:\n“sí… esto es lo que quiero cuidar”. 💗" },
+      { img:"foto18.jpeg", text:"🏙️✨ Caminando entre gente y luces\nY aun así… yo solo te veía a ti.\nNosotros en nuestro mundo. 💞" },
+      { img:"foto19.jpeg", text:"👨‍👩‍👧🌿 Un momento familiar\nDe esos que no se repiten igual.\nY yo agradezco vivirlos contigo. 🤍" },
+      { img:"foto20.jpeg", text:"⛰️💙 Paisaje bonito…\npero más bonito es tenerte a mi lado.\nNosotros y la vida. ✨" },
 
-      { img:"foto21.jpg", text:"☕🍰 Una cita sencilla\nY aun así… mi parte favorita eres tú.\nNosotros, sin prisa. 💗" },
-      { img:"foto22.jpg", text:"🎡✨ Plan de diversión\nMe encanta vernos así:\nriendo, jugando y disfrutando como niños. 😄💞" },
-      { img:"foto23.jpg", text:"🛣️💞 Un viaje más\nY mi destino favorito sigue siendo el mismo:\nllegar contigo. ✨" },
-      { img:"foto24.jpg", text:"🪞📸 Un reflejo de nosotros\nCuando te miro, recuerdo por qué vale la pena.\nPorque tú sí. 💗" },
-      { img:"foto25.jpg", text:"🧥✨ Salidita juntos\nMe gusta cuando combinamos planes y sonrisas.\nNosotros, siendo equipo. 🤝💞" },
-      { img:"foto26.jpg", text:"📝💛 Decisiones y pasos\nLo bonito no es solo soñar…\nes caminarlo contigo. 🫶✨" },
-      { img:"foto27.jpg", text:"🪞🤍 Un momentito en el espejo\nY yo pensando:\n“qué suerte tengo de llamarte mi amor”. 💗" },
-      { img:"foto28.jpg", text:"😘💞 Un besito que dice todo\nSin tantas palabras.\nPorque nosotros hablamos con el corazón. ✨" },
-      { img:"foto29.jpg", text:"🌙✨ Una noche cualquiera\npero con nosotros se vuelve historia.\nTe elijo incluso en lo cotidiano. 💗" },
-      { img:"foto30.jpg", text:"🌃🫶 Salida nocturna\nMe encanta vernos así:\ntranquilos… y juntitos. 💞" },
+      { img:"foto21.jpeg", text:"☕🍰 Una cita sencilla\nY aun así… mi parte favorita eres tú.\nNosotros, sin prisa. 💗" },
+      { img:"foto22.jpeg", text:"🎡✨ Plan de diversión\nMe encanta vernos así:\nriendo, jugando y disfrutando como niños. 😄💞" },
+      { img:"foto23.jpeg", text:"🛣️💞 Un viaje más\nY mi destino favorito sigue siendo el mismo:\nllegar contigo. ✨" },
+      { img:"foto24.jpeg", text:"🪞📸 Un reflejo de nosotros\nCuando te miro, recuerdo por qué vale la pena.\nPorque tú sí. 💗" },
+      { img:"foto25.jpeg", text:"🧥✨ Salidita juntos\nMe gusta cuando combinamos planes y sonrisas.\nNosotros, siendo equipo. 🤝💞" },
+      { img:"foto26.jpeg", text:"📝💛 Decisiones y pasos\nLo bonito no es solo soñar…\nes caminarlo contigo. 🫶✨" },
+      { img:"foto27.jpeg", text:"🪞🤍 Un momentito en el espejo\nY yo pensando:\n“qué suerte tengo de llamarte mi amor”. 💗" },
+      { img:"foto28.jpeg", text:"😘💞 Un besito que dice todo\nSin tantas palabras.\nPorque nosotros hablamos con el corazón. ✨" },
+      { img:"foto29.jpeg", text:"🌙✨ Una noche cualquiera\npero con nosotros se vuelve historia.\nTe elijo incluso en lo cotidiano. 💗" },
+      { img:"foto30.jpeg", text:"🌃🫶 Salida nocturna\nMe encanta vernos así:\ntranquilos… y juntitos. 💞" },
 
-      { img:"foto31.jpg", text:"🎉💙 Un día importante\nVerte a mi lado me da fuerzas.\nNosotros celebrando la vida. ✨" },
-      { img:"foto32.jpg", text:"👨‍👩‍👧‍👦🤍 Juntitos en familia\nEstos momentos valen oro.\nY contigo… valen más. 💗" },
-      { img:"foto33.jpg", text:"😄💞 Risas sin filtro\nDe esas que nacen cuando hay confianza.\nAsí se siente nuestro amor. ✨" },
-      { img:"foto34.jpg", text:"✨📸 Una noche bonita\nYo no necesito mucho…\nsi te tengo a ti. 💗" },
-      { img:"foto35.jpg", text:"🍽️💛 Comidita y compañía\nAmo compartir contigo.\nPorque en tu lado todo sabe mejor. 😋💞" },
-      { img:"foto36.jpg", text:"😘🤍 Un gesto chiquito\nque para mí es gigante.\nPorque contigo me siento en casa. 🏡✨" },
-      { img:"foto37.jpg", text:"😚💞 Nuestro lado loquito\nMe encanta vernos así:\nsin miedo al ridículo, solo felices. 😂✨" },
-      { img:"foto38.jpg", text:"♨️💙 Un respiro para el alma\nQué rico es pausar la vida…\ny quedarnos nosotros. ✨" },
-      { img:"foto39.jpg", text:"😎☀️ Plan relax\nTú, yo… y la sensación de que todo está bien.\nEso es amor. 💗" },
-      { img:"foto40.jpg", text:"🤍🫶 Momentos de cuidado\nDe esos donde uno entiende:\nel amor se demuestra estando. ✨" },
+      { img:"foto31.jpeg", text:"🎉💙 Un día importante\nVerte a mi lado me da fuerzas.\nNosotros celebrando la vida. ✨" },
+      { img:"foto32.jpeg", text:"👨‍👩‍👧‍👦🤍 Juntitos en familia\nEstos momentos valen oro.\nY contigo… valen más. 💗" },
+      { img:"foto33.jpeg", text:"😄💞 Risas sin filtro\nDe esas que nacen cuando hay confianza.\nAsí se siente nuestro amor. ✨" },
+      { img:"foto34.jpeg", text:"✨📸 Una noche bonita\nYo no necesito mucho…\nsi te tengo a ti. 💗" },
+      { img:"foto35.jpeg", text:"🍽️💛 Comidita y compañía\nAmo compartir contigo.\nPorque en tu lado todo sabe mejor. 😋💞" },
+      { img:"foto36.jpeg", text:"😘🤍 Un gesto chiquito\nque para mí es gigante.\nPorque contigo me siento en casa. 🏡✨" },
+      { img:"foto37.jpeg", text:"😚💞 Nuestro lado loquito\nMe encanta vernos así:\nsin miedo al ridículo, solo felices. 😂✨" },
+      { img:"foto38.jpeg", text:"♨️💙 Un respiro para el alma\nQué rico es pausar la vida…\ny quedarnos nosotros. ✨" },
+      { img:"foto39.jpeg", text:"😎☀️ Plan relax\nTú, yo… y la sensación de que todo está bien.\nEso es amor. 💗" },
+      { img:"foto40.jpeg", text:"🤍🫶 Momentos de cuidado\nDe esos donde uno entiende:\nel amor se demuestra estando. ✨" },
 
-      { img:"foto41.jpg", text:"💞📸 Otra fotito de nosotros\nY yo sigo pensando lo mismo:\nme encantas. 😍✨" },
-      { img:"foto42.jpg", text:"🌙💗 Una noche cerquita\nY aunque el mundo esté duro…\nnosotros podemos con todo. 🫶" },
-      { img:"foto43.jpg", text:"☕🤍 Un cafecito y tú\nPequeños planes.\nGrandes recuerdos. ✨💞" },
-      { img:"foto44.jpg", text:"🌳💛 Sentados, tranquilos\nA veces la vida se siente perfecta\ncuando solo estamos nosotros. 💗" },
-      { img:"foto45.jpg", text:"🧣🍃 Un día fresco\nPero tu compañía calienta todo.\nNosotros, siempre. 💞" },
-      { img:"foto46.jpg", text:"🏠🤍 Una tarde en casita\nAmo esos momentos donde no hacemos “nada”…\npero lo tenemos todo. ✨" },
-      { img:"foto47.jpg", text:"💙✨ Nochecita con luces\nY nosotros ahí…\ncomo si el mundo no existiera. 💗" },
-      { img:"foto48.jpg", text:"🌾👨‍👩‍👧 Un día en el campo\nRespirar, caminar, reír.\nGracias por vivirlo conmigo. 🤍✨" },
-      { img:"foto49.jpg", text:"⛰️💞 Vista hermosa\nPero nada se compara\ncon verte sonreír a mi lado. ✨" },
-      { img:"foto50.jpg", text:"🎭💛 Un momento especial\nMe encanta vernos cumpliendo etapas.\nNosotros avanzando. 🫶✨" },
+      { img:"foto41.jpeg", text:"💞📸 Otra fotito de nosotros\nY yo sigo pensando lo mismo:\nme encantas. 😍✨" },
+      { img:"foto42.jpeg", text:"🌙💗 Una noche cerquita\nY aunque el mundo esté duro…\nnosotros podemos con todo. 🫶" },
+      { img:"foto43.jpeg", text:"☕🤍 Un cafecito y tú\nPequeños planes.\nGrandes recuerdos. ✨💞" },
+      { img:"foto44.jpeg", text:"🌳💛 Sentados, tranquilos\nA veces la vida se siente perfecta\ncuando solo estamos nosotros. 💗" },
+      { img:"foto45.jpeg", text:"🧣🍃 Un día fresco\nPero tu compañía calienta todo.\nNosotros, siempre. 💞" },
+      { img:"foto46.jpeg", text:"🏠🤍 Una tarde en casita\nAmo esos momentos donde no hacemos “nada”…\npero lo tenemos todo. ✨" },
+      { img:"foto47.jpeg", text:"💙✨ Nochecita con luces\nY nosotros ahí…\ncomo si el mundo no existiera. 💗" },
+      { img:"foto48.jpeg", text:"🌾👨‍👩‍👧 Un día en el campo\nRespirar, caminar, reír.\nGracias por vivirlo conmigo. 🤍✨" },
+      { img:"foto49.jpeg", text:"⛰️💞 Vista hermosa\nPero nada se compara\ncon verte sonreír a mi lado. ✨" },
+      { img:"foto50.jpeg", text:"🎭💛 Un momento especial\nMe encanta vernos cumpliendo etapas.\nNosotros avanzando. 🫶✨" },
 
-      { img:"foto51.jpg", text:"🤍📸 Cerquita de ti\nYo solo quiero eso:\npaz, amor… y nosotros. 💗" },
-      { img:"foto52.jpg", text:"🍷✨ Una noche bonita\nEntre luces, charla y miradas.\nNosotros disfrutando sin prisa. 💞" },
-      { img:"foto53.jpg", text:"💃🕺✨ Selfie con vibra\nMe gusta cuando salimos\ny el mundo se siente más bonito. 💗" },
-      { img:"foto54.jpg", text:"🪞🤍 Un abrazo que se queda\nMe encanta abrazarte por detrás\nporque ahí siento: “aquí pertenezco”. 💞" },
-      { img:"foto55.jpg", text:"🍽️💛 Un almuerzo juntos\nGracias por compartir tu tiempo conmigo.\nNosotros construyendo bonito. ✨" },
-      { img:"foto56.jpg", text:"🪞💞 Otra fotito abrazados\nYo amo este tipo de momentos:\nsin ruido… solo nosotros. 🤍" },
-      { img:"foto57.jpg", text:"😎💗 Complicidad\nTú y yo entendiendo todo\nsin decir demasiado. ✨" },
-      { img:"foto58.jpg", text:"🤵‍♂️💞 Un día formal\nY aun así… lo más lindo\nes que estamos nosotros. ✨" },
-      { img:"foto59.jpg", text:"🌿🎠 Un ratito de calma\nMe encanta vernos así:\ncomo dos niños felices en la vida. 😄💞" },
-      { img:"foto60.jpg", text:"Hoy entendí que la vida no solo se trata de correr,\ntrabajar o alcanzar metas… también se trata de sostener\nlo más frágil y sagrado con las manos, con el alma\ny con el corazón 🥺🤍👶✨.\n\nUn bebé es un milagro silencioso: llega sin palabras,\npero cambia todo. Te enseña paciencia, ternura,\nvalentía… y te recuerda que el amor verdadero\nno se presume: se cuida. 💗\n\nY cuando lo miras, sientes algo que no se explica…\ncomo si la vida te dijera:\n“aquí está una razón nueva para hacerlo todo mejor” 🙏✨.\n\nOjalá que Dios siempre lo proteja,\nque crezca rodeado de paz, salud y amor.\nY que nosotros nunca olvidemos esto:\nlo más bonito del mundo… es cuidar. 🤍" }
+      { img:"foto51.jpeg", text:"🤍📸 Cerquita de ti\nYo solo quiero eso:\npaz, amor… y nosotros. 💗" },
+      { img:"foto52.jpeg", text:"🍷✨ Una noche bonita\nEntre luces, charla y miradas.\nNosotros disfrutando sin prisa. 💞" },
+      { img:"foto53.jpeg", text:"💃🕺✨ Selfie con vibra\nMe gusta cuando salimos\ny el mundo se siente más bonito. 💗" },
+      { img:"foto54.jpeg", text:"🪞🤍 Un abrazo que se queda\nMe encanta abrazarte por detrás\nporque ahí siento: “aquí pertenezco”. 💞" },
+      { img:"foto55.jpeg", text:"🍽️💛 Un almuerzo juntos\nGracias por compartir tu tiempo conmigo.\nNosotros construyendo bonito. ✨" },
+      { img:"foto56.jpeg", text:"🪞💞 Otra fotito abrazados\nYo amo este tipo de momentos:\nsin ruido… solo nosotros. 🤍" },
+      { img:"foto57.jpeg", text:"😎💗 Complicidad\nTú y yo entendiendo todo\nsin decir demasiado. ✨" },
+      { img:"foto58.jpeg", text:"🤵‍♂️💞 Un día formal\nY aun así… lo más lindo\nes que estamos nosotros. ✨" },
+      { img:"foto59.jpeg", text:"🌿🎠 Un ratito de calma\nMe encanta vernos así:\ncomo dos niños felices en la vida. 😄💞" },
+      { img:"foto60.jpeg", text:"Hoy entendí que la vida no solo se trata de correr,\ntrabajar o alcanzar metas… también se trata de sostener\nlo más frágil y sagrado con las manos, con el alma\ny con el corazón 🥺🤍👶✨.\n\nUn bebé es un milagro silencioso: llega sin palabras,\npero cambia todo. Te enseña paciencia, ternura,\nvalentía… y te recuerda que el amor verdadero\nno se presume: se cuida. 💗\n\nY cuando lo miras, sientes algo que no se explica…\ncomo si la vida te dijera:\n“aquí está una razón nueva para hacerlo todo mejor” 🙏✨.\n\nOjalá que Dios siempre lo proteja,\nque crezca rodeado de paz, salud y amor.\nY que nosotros nunca olvidemos esto:\nlo más bonito del mundo… es cuidar. 🤍" }
     ];
 
     // STORY PLAYER
@@ -1016,7 +1030,6 @@ cuidarte con amor… y elegirnos para siempre.`;
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
 
-    // ✅ barra simple
     const storyCount = document.getElementById("storyCount");
     const progressFill = document.getElementById("progressFill");
 
@@ -1024,7 +1037,10 @@ cuidarte con amor… y elegirnos para siempre.`;
 
     function setImage(src){
       storyImg.classList.remove("show");
-      storyImg.src = src;
+
+      // ✅ cache-buster para que siempre se actualice
+      storyImg.src = "./" + src + "?v=3";
+
       storyImg.onload = () => storyImg.classList.add("show");
       storyImg.onerror = () => {
         storyImg.classList.add("show");
@@ -1035,7 +1051,6 @@ cuidarte con amor… y elegirnos para siempre.`;
     function render(){
       const slide = slides[idx];
 
-      // ✅ contador + barra
       if(storyCount) storyCount.textContent = `${idx+1}/${slides.length}`;
       if(progressFill) progressFill.style.width = `${((idx+1)/slides.length)*100}%`;
 

@@ -927,7 +927,63 @@ cuidarte con amor… y elegirnos para siempre.`;
       if(e.target === lyricsModal) closeLyricsFn();
     });
 
-    // STORY SLIDES
+    // ==============================
+    // ✅ TEXTOS PARA FOTO11 → FOTO60
+    // ==============================
+    const CAPTIONS = {
+      foto11: "En una mesa sencilla, pero con todo lo que vale: ustedes 💛🍽️👨‍👩‍👧✨",
+      foto12: "A veces una foto no necesita mucho… solo un pedacito de ese día y ya se siente especial ✨📸🤍",
+      foto13: "Brindis de heladitos y de momentos bonitos 🍦🥰🤍✨ (de esos que se quedan)",
+      foto14: "Equipo completo 😄🫶✨ donde ustedes están, todo se vuelve más alegre.",
+      foto15: "Una salida con sonrisas reales 😄🌟 y esa energía bonita que se contagia.",
+      foto16: "Lo más lindo de la vida: compartir con quienes amas 👨‍👩‍👧🫶✨💛",
+      foto17: "Ella y su esencia… imposible no mirarla con orgullo 🥰✨💐",
+      foto18: "Días que se sienten como aventura 🚶‍♂️🚶‍♀️✨🌆 y se guardan para siempre.",
+      foto19: "Familia, abrazo y paz… todo en una sola foto 🫶👨‍👩‍👧🤍✨",
+      foto20: "Paisaje bonito + ustedes = recuerdo perfecto 🌿🏔️🥰✨",
+      foto21: "Una cita sencilla, pero con un amor que se nota en la mirada 🥹🤍🍽️✨",
+      foto22: "Elegantes, seguros y juntos… así se ve cuando uno elige bien 😌🫶✨💛",
+      foto23: "En cualquier lugar, mientras sea contigo, todo tiene sentido 🥰🚗✨🤍",
+      foto24: "De esas fotos espejo que gritan: “aquí estamos, eligiéndonos” 🪞🫶✨💛",
+      foto25: "Un “nosotros” que se ve tranquilo… y eso vale oro 🥹🤍✨",
+      foto26: "Momentos serios, pero con amor al lado… todo pesa menos 🫶📄✨🤍",
+      foto27: "Una foto simple, pero con ese toque de complicidad que solo ustedes tienen 😌🫶✨",
+      foto28: "Un beso que dice más que mil palabras 😘🌿✨🤍 (puro cariño)",
+      foto29: "De esas noches donde la risa se queda pegada en el corazón 😄🌙✨🤍",
+      foto30: "No importa la hora… contigo, siempre se siente hogar 🌙🫶✨",
+      foto31: "Día compartido, risas y compañía bonita… de eso está hecha la felicidad 🥰✨👨‍👩‍👧",
+      foto32: "Cuando la vida se pone formal, igual se luce mejor si estás con tu persona 💼🫶✨🤍",
+      foto33: "Modo descanso, modo amor… lo más bonito es estar cerquita 😌🫶✨🤍",
+      foto34: "Una foto nocturna, pero ustedes iluminan todo 🥰✨🌙🤍",
+      foto35: "Una mesa con comida rica… y el mejor complemento: ustedes juntos 🍽️🥰✨🤍",
+      foto36: "Un cariñito de esos que curan el alma 🥹😘🤍✨",
+      foto37: "Frío afuera… pero ustedes con calorcito de amor 🧣🥰✨🤍",
+      foto38: "Un día de aire libre, paz y “nosotros” 🌤️🫶✨🤍",
+      foto39: "Así se ve una salida bonita: relax, sonrisa y compañía 🕶️😄✨🤍",
+      foto40: "Momentos que no se repiten… y por eso se vuelven tesoro 🥹🫶✨🤍",
+      foto41: "Solo miren esa foto… parece que el tiempo se portó bonito con ustedes 🥰✨🤍",
+      foto42: "Carita pegadita y corazón tranquilito 🫶🥰✨🤍",
+      foto43: "Un café, una charla y ustedes… plan perfecto ☕🥰✨🤍",
+      foto44: "Sentados, tranquilos, y con la vida respirando alrededor 🌳🫶✨🤍",
+      foto45: "Día al aire libre, mirada bonita y amor del que se siente real 🌿🥰✨🤍",
+      foto46: "La paz de estar juntitos… como si el mundo se apagara un ratito 🛏️🫶✨🤍",
+      foto47: "Una foto con luces locas, pero con un amor bien claro 😄✨🤍🫶",
+      foto48: "Caminando juntos, creciendo juntos… así se construye lo bonito 🌿🫶✨🤍",
+      foto49: "Montañas atrás, amor adelante 🏔️🥰✨🤍 (ustedes siempre)",
+      foto50: "Una foto que se siente “celebración” 🎉✨🫶🤍 como si la vida aplaudiera.",
+      foto51: "Un abrazo que se ve y se siente… de esos que dan calma 🫂🥰✨🤍",
+      foto52: "Una cita con colores, risas y ese “algo” que solo ustedes tienen 🍽️✨🥰🤍",
+      foto53: "Luces rojas, pero el cariño más lindo 🫶🥰✨🤍",
+      foto54: "Un abrazo por detrás que dice: “aquí estoy contigo” 🫂🥹✨🤍",
+      foto55: "Comida rica y miradas sinceras… eso es felicidad cotidiana 🍽️🥰✨🤍",
+      foto56: "Abrazados, y el mundo puede esperar 🫂✨🤍🥰",
+      foto57: "Carita seria, pero corazón bien enamorado 😎🫶✨🤍",
+      foto58: "De esas fotos que parecen capítulo importante 🥹✨🤍🫶 (y sí lo es)",
+      foto59: "Un respiro bonito… porque también se vale disfrutar el momento 😌🌿✨🤍",
+      foto60: "Hoy entendí que la vida no solo se trata de correr, trabajar o alcanzar metas… también se trata de sostener lo más frágil y sagrado con las manos, con el alma y con el corazón 🥹🤍👶✨.\n\nUn bebé es un milagro silencioso: llega sin palabras, pero cambia todo. Te enseña paciencia, ternura, valentía… y te recuerda que el amor verdadero no se presume: se cuida.\n\nY cuando lo miras, sientes algo que no se explica… como si la vida te dijera: “aquí está una razón nueva para hacerlo todo mejor” 🙏✨.\n\nQue nunca le falte calorcito, protección y amor del bonito… del que abraza, del que acompaña, del que se queda 🤍🫶🌙"
+    };
+
+    // STORY SLIDES (10 primeras + auto-foto11..foto60)
     const slides = [
       { img:"fotos01.jpg", text:"🏃‍♂️🏃‍♀️ Nuestro segundo Ultra 💪✨\nDiversión, esfuerzo y nosotros.\nContigo, todo se siente posible… y mi lugar es a tu lado. 💗" },
       { img:"fotos02.jpg", text:"🏫💞 Me acompañaste a una promoción del cole\nGracias por apoyarme y caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶" },
@@ -941,11 +997,23 @@ cuidarte con amor… y elegirnos para siempre.`;
       { img:"fotos10.jpg", text:"🏞️💫 Laguna Radian\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗" }
     ];
 
+    // ✅ Auto-agrega foto11..foto60 al slider
+    // Cambia EXT si tus fotos no son .jpeg
+    const EXT = "jpeg"; // "jpg" o "png" si corresponde
+
+    for(let n=11; n<=60; n++){
+      const key = "foto" + n;
+      const file = key + "." + EXT;
+      const caption = CAPTIONS[key] || "💗 Un momento bonito que guardo contigo ✨";
+      slides.push({ img: file, text: caption });
+    }
+
     // STORY PLAYER
     const story = document.getElementById("story");
     const mainWrap = document.getElementById("mainWrap");
     const storyImg = document.getElementById("storyImg");
     const storyText = document.getElementById("storyText");
+    const storyTitle = document.getElementById("storyTitle");
     const progress = document.getElementById("progress");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
@@ -970,7 +1038,7 @@ cuidarte con amor… y elegirnos para siempre.`;
       storyImg.onload = () => storyImg.classList.add("show");
       storyImg.onerror = () => {
         storyImg.classList.add("show");
-        storyText.textContent = "⚠️ No cargó una foto.\nRevisa el nombre del archivo en GitHub.\n\nSe intentó cargar:\n" + src + "\n\n(igual puedes seguir)";
+        storyText.textContent = "⚠️ No cargó una foto.\nRevisa el nombre del archivo.\n\nSe intentó cargar:\n" + src + "\n\n(igual puedes seguir)";
       };
     }
 
@@ -979,6 +1047,11 @@ cuidarte con amor… y elegirnos para siempre.`;
       buildProgress();
       setImage(slide.img);
       storyText.textContent = slide.text;
+
+      // ✅ Título con numeración
+      if(storyTitle){
+        storyTitle.textContent = `💗 Massiel… esto es para ti (${idx+1}/${slides.length})`;
+      }
 
       prevBtn.disabled = idx === 0;
       prevBtn.style.opacity = idx === 0 ? ".55" : "1";

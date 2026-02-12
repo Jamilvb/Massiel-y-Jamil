@@ -611,7 +611,7 @@
           <div class="callout">
             <strong>Promesa bonita:</strong> elegirme contigo en las buenas y en las difíciles.
             Ser tu paz, tu apoyo y tu lugar seguro.
-            Que lo nuestro no se rinda: que se cuide, que crezca… y que se quede. 💞
+            Que lo nuestro no se rinda: que se (cuid)e, que crezca… y que se quede. 💞
           </div>
 
           <div class="pillRow">
@@ -706,8 +706,16 @@
     </main>
   </div>
 
-  <!-- Audio -->
-  <audio id="bgm" src="./massiel-mi-vida.mp3" preload="auto" loop playsinline></audio>
+  <!-- Audio (✅ ahora desde GitHub RAW) -->
+  <audio
+    id="bgm"
+    src="https://raw.githubusercontent.com/jamilvb/Massiel-y-Jamil/main/massiel-mi-vida.mp3?v=2"
+    preload="metadata"
+    loop
+    playsinline
+    crossorigin="anonymous"
+  ></audio>
+
   <div class="confetti" id="confetti" aria-hidden="true"></div>
 
   <script>
@@ -756,7 +764,7 @@
       toastTimer = setTimeout(()=> el.style.opacity="0", 1600);
     }
 
-    // ===== AUDIO (arreglo definitivo) =====
+    // ===== AUDIO =====
     const audio = document.getElementById("bgm");
     audio.volume = 0.85;
 
@@ -769,7 +777,7 @@
     }
 
     audio.addEventListener("error", () => {
-      toast("⚠️ No se encontró la música. Revisa: massiel-mi-vida.mp3");
+      toast("⚠️ No se pudo cargar la música. Revisa el link RAW del mp3.");
     });
 
     async function playMusic(){
@@ -907,7 +915,6 @@ cuidarte con amor… y elegirnos para siempre.`;
     function openLyrics(){
       lyricsModal.style.display = "flex";
       lyricsModal.setAttribute("aria-hidden","false");
-      // gesto de abrir: intenta sonar
       playMusic();
     }
     function closeLyricsFn(){
@@ -982,7 +989,6 @@ cuidarte con amor… y elegirnos para siempre.`;
     function finishStory(){
       story.style.display = "none";
       mainWrap.style.display = "flex";
-      // ya hubo interacción: intenta sonar
       playMusic();
     }
 

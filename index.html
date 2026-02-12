@@ -335,42 +335,57 @@
       padding: 18px;
       background: rgba(0,0,0,.50);
     }
+
+    /* ✅ FIX 1: CARD con alto controlado para que nunca “empuje” botones */
     .storyCard{
       width: min(780px, 100%);
+      height: min(92vh, 760px);          /* <- clave */
+      display:flex;
+      flex-direction:column;
       background: rgba(255,255,255,.96);
       border-radius: 24px;
       box-shadow: 0 24px 80px rgba(0,0,0,.35);
       overflow: hidden;
       border: 1px solid rgba(255,255,255,.55);
     }
+
+    /* ✅ FIX 2: TOP más compacto (ya no se ve avultado) */
     .storyTop{
-      display:flex;
+      display:grid;
+      grid-template-columns: auto 1fr;
       align-items:center;
-      justify-content:space-between;
       gap:10px;
-      padding: 12px 14px;
+      padding: 8px 10px;                /* <- antes 12 14 */
       background: linear-gradient(90deg, rgba(255,94,168,.16), rgba(122,60,255,.12));
       border-bottom: 1px solid rgba(0,0,0,.06);
     }
     .storyTitle{
       font-weight: 900;
       color: #2a1f55;
-      font-size: 14px;
+      font-size: 13px;                  /* <- antes 14 */
       white-space:nowrap;
     }
+
+    /* ✅ progreso compacto + sin wrap (no crece hacia abajo) */
     .progress{
       display:flex;
-      gap:6px;
-      flex: 1;
+      gap:4px;                          /* <- antes 6 */
       justify-content:flex-end;
-      flex-wrap:wrap;
+      align-items:center;
+      flex-wrap:nowrap;                 /* <- clave */
+      overflow-x:auto;                  /* <- si son muchos, se “corre” */
+      scrollbar-width:none;
+      -ms-overflow-style:none;
     }
+    .progress::-webkit-scrollbar{ display:none; }
+
     .bar{
-      width: 18px;
-      height: 6px;
+      width: 14px;                      /* <- antes 18 */
+      height: 4px;                      /* <- antes 6 */
       border-radius: 99px;
       background: rgba(0,0,0,.12);
       overflow:hidden;
+      flex: 0 0 auto;
     }
     .bar > span{
       display:block;
@@ -380,16 +395,20 @@
       border-radius: 99px;
     }
 
+    /* ✅ FIX 3: BODY scrollable */
     .storyBody{
-      padding: 14px;
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
+      padding: 12px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      flex: 1;
+      overflow:hidden;                  /* contenido interno controla scroll */
+      min-height: 0;
     }
 
     .storyMedia{
       width:100%;
-      height: min(440px, 56vh);
+      height: min(420px, 48vh);
       border-radius: 18px;
       background: linear-gradient(135deg, rgba(255,94,168,.28), rgba(122,60,255,.22));
       border: 1px solid rgba(0,0,0,.06);
@@ -398,8 +417,8 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      flex: 0 0 auto;
     }
-    /* ✅ sin recorte: contain */
     .storyMedia img{
       width:100%;
       height:100%;
@@ -411,6 +430,7 @@
     }
     .storyMedia img.show{ opacity: 1; }
 
+    /* ✅ FIX 4: TEXTO con scroll interno (para textos largos) */
     .storyText{
       background: rgba(255,255,255,.88);
       border:1px solid rgba(0,0,0,.06);
@@ -420,17 +440,28 @@
       line-height:1.6;
       font-size: 15px;
       white-space: pre-line;
+
+      flex: 1;                          /* ocupa lo que queda */
+      overflow:auto;                    /* <- clave */
+      min-height: 0;
+      -webkit-overflow-scrolling: touch;
     }
 
+    /* ✅ FIX 5: BOTONES siempre visibles (sticky dentro de la card) */
     .storyActions{
       display:flex;
       gap:10px;
       justify-content:space-between;
       align-items:center;
-      padding: 12px 14px 16px;
+      padding: 12px 14px 14px;
       border-top: 1px solid rgba(0,0,0,.06);
-      background: rgba(255,255,255,.9);
+      background: rgba(255,255,255,.92);
+
+      position: sticky;
+      bottom: 0;
+      z-index: 5;
     }
+
     .navBtn{
       appearance:none;
       border:none;
@@ -440,6 +471,7 @@
       border-radius: 16px;
       transition: transform .12s ease, filter .12s ease;
       user-select:none;
+      flex: 0 0 auto;
     }
     .navBtn:active{ transform: translateY(1px); }
     .navBtn:disabled{ cursor:not-allowed; filter: grayscale(.2); }
@@ -453,6 +485,15 @@
       background: linear-gradient(135deg, var(--primary), var(--primary2));
       color: #fff;
       box-shadow: 0 12px 24px rgba(255,46,134,.18);
+    }
+
+    /* 🔧 Ajuste extra para pantallas pequeñas */
+    @media (max-width: 480px){
+      .storyOverlay{ padding: 10px; }
+      .storyCard{ height: 94vh; }
+      .storyMedia{ height: 44vh; }
+      .storyText{ font-size: 14px; }
+      .navBtn{ padding: 11px 12px; }
     }
 
     /* ===== MODAL LETRA ===== */
@@ -927,63 +968,7 @@ cuidarte con amor… y elegirnos para siempre.`;
       if(e.target === lyricsModal) closeLyricsFn();
     });
 
-    // ==============================
-    // ✅ TEXTOS PARA FOTO11 → FOTO60
-    // ==============================
-    const CAPTIONS = {
-      foto11: "En una mesa sencilla, pero con todo lo que vale: ustedes 💛🍽️👨‍👩‍👧✨",
-      foto12: "A veces una foto no necesita mucho… solo un pedacito de ese día y ya se siente especial ✨📸🤍",
-      foto13: "Brindis de heladitos y de momentos bonitos 🍦🥰🤍✨ (de esos que se quedan)",
-      foto14: "Equipo completo 😄🫶✨ donde ustedes están, todo se vuelve más alegre.",
-      foto15: "Una salida con sonrisas reales 😄🌟 y esa energía bonita que se contagia.",
-      foto16: "Lo más lindo de la vida: compartir con quienes amas 👨‍👩‍👧🫶✨💛",
-      foto17: "Ella y su esencia… imposible no mirarla con orgullo 🥰✨💐",
-      foto18: "Días que se sienten como aventura 🚶‍♂️🚶‍♀️✨🌆 y se guardan para siempre.",
-      foto19: "Familia, abrazo y paz… todo en una sola foto 🫶👨‍👩‍👧🤍✨",
-      foto20: "Paisaje bonito + ustedes = recuerdo perfecto 🌿🏔️🥰✨",
-      foto21: "Una cita sencilla, pero con un amor que se nota en la mirada 🥹🤍🍽️✨",
-      foto22: "Elegantes, seguros y juntos… así se ve cuando uno elige bien 😌🫶✨💛",
-      foto23: "En cualquier lugar, mientras sea contigo, todo tiene sentido 🥰🚗✨🤍",
-      foto24: "De esas fotos espejo que gritan: “aquí estamos, eligiéndonos” 🪞🫶✨💛",
-      foto25: "Un “nosotros” que se ve tranquilo… y eso vale oro 🥹🤍✨",
-      foto26: "Momentos serios, pero con amor al lado… todo pesa menos 🫶📄✨🤍",
-      foto27: "Una foto simple, pero con ese toque de complicidad que solo ustedes tienen 😌🫶✨",
-      foto28: "Un beso que dice más que mil palabras 😘🌿✨🤍 (puro cariño)",
-      foto29: "De esas noches donde la risa se queda pegada en el corazón 😄🌙✨🤍",
-      foto30: "No importa la hora… contigo, siempre se siente hogar 🌙🫶✨",
-      foto31: "Día compartido, risas y compañía bonita… de eso está hecha la felicidad 🥰✨👨‍👩‍👧",
-      foto32: "Cuando la vida se pone formal, igual se luce mejor si estás con tu persona 💼🫶✨🤍",
-      foto33: "Modo descanso, modo amor… lo más bonito es estar cerquita 😌🫶✨🤍",
-      foto34: "Una foto nocturna, pero ustedes iluminan todo 🥰✨🌙🤍",
-      foto35: "Una mesa con comida rica… y el mejor complemento: ustedes juntos 🍽️🥰✨🤍",
-      foto36: "Un cariñito de esos que curan el alma 🥹😘🤍✨",
-      foto37: "Frío afuera… pero ustedes con calorcito de amor 🧣🥰✨🤍",
-      foto38: "Un día de aire libre, paz y “nosotros” 🌤️🫶✨🤍",
-      foto39: "Así se ve una salida bonita: relax, sonrisa y compañía 🕶️😄✨🤍",
-      foto40: "Momentos que no se repiten… y por eso se vuelven tesoro 🥹🫶✨🤍",
-      foto41: "Solo miren esa foto… parece que el tiempo se portó bonito con ustedes 🥰✨🤍",
-      foto42: "Carita pegadita y corazón tranquilito 🫶🥰✨🤍",
-      foto43: "Un café, una charla y ustedes… plan perfecto ☕🥰✨🤍",
-      foto44: "Sentados, tranquilos, y con la vida respirando alrededor 🌳🫶✨🤍",
-      foto45: "Día al aire libre, mirada bonita y amor del que se siente real 🌿🥰✨🤍",
-      foto46: "La paz de estar juntitos… como si el mundo se apagara un ratito 🛏️🫶✨🤍",
-      foto47: "Una foto con luces locas, pero con un amor bien claro 😄✨🤍🫶",
-      foto48: "Caminando juntos, creciendo juntos… así se construye lo bonito 🌿🫶✨🤍",
-      foto49: "Montañas atrás, amor adelante 🏔️🥰✨🤍 (ustedes siempre)",
-      foto50: "Una foto que se siente “celebración” 🎉✨🫶🤍 como si la vida aplaudiera.",
-      foto51: "Un abrazo que se ve y se siente… de esos que dan calma 🫂🥰✨🤍",
-      foto52: "Una cita con colores, risas y ese “algo” que solo ustedes tienen 🍽️✨🥰🤍",
-      foto53: "Luces rojas, pero el cariño más lindo 🫶🥰✨🤍",
-      foto54: "Un abrazo por detrás que dice: “aquí estoy contigo” 🫂🥹✨🤍",
-      foto55: "Comida rica y miradas sinceras… eso es felicidad cotidiana 🍽️🥰✨🤍",
-      foto56: "Abrazados, y el mundo puede esperar 🫂✨🤍🥰",
-      foto57: "Carita seria, pero corazón bien enamorado 😎🫶✨🤍",
-      foto58: "De esas fotos que parecen capítulo importante 🥹✨🤍🫶 (y sí lo es)",
-      foto59: "Un respiro bonito… porque también se vale disfrutar el momento 😌🌿✨🤍",
-      foto60: "Hoy entendí que la vida no solo se trata de correr, trabajar o alcanzar metas… también se trata de sostener lo más frágil y sagrado con las manos, con el alma y con el corazón 🥹🤍👶✨.\n\nUn bebé es un milagro silencioso: llega sin palabras, pero cambia todo. Te enseña paciencia, ternura, valentía… y te recuerda que el amor verdadero no se presume: se cuida.\n\nY cuando lo miras, sientes algo que no se explica… como si la vida te dijera: “aquí está una razón nueva para hacerlo todo mejor” 🙏✨.\n\nQue nunca le falte calorcito, protección y amor del bonito… del que abraza, del que acompaña, del que se queda 🤍🫶🌙"
-    };
-
-    // STORY SLIDES (10 primeras + auto-foto11..foto60)
+    // STORY SLIDES
     const slides = [
       { img:"fotos01.jpg", text:"🏃‍♂️🏃‍♀️ Nuestro segundo Ultra 💪✨\nDiversión, esfuerzo y nosotros.\nContigo, todo se siente posible… y mi lugar es a tu lado. 💗" },
       { img:"fotos02.jpg", text:"🏫💞 Me acompañaste a una promoción del cole\nGracias por apoyarme y caminar conmigo.\nTu presencia me da paz… y me inspira a mejorar. 🫶" },
@@ -997,26 +982,15 @@ cuidarte con amor… y elegirnos para siempre.`;
       { img:"fotos10.jpg", text:"🏞️💫 Laguna Radian\nSi me das la mano…\nyo te elijo una y otra vez, sin final. 💗" }
     ];
 
-    // ✅ Auto-agrega foto11..foto60 al slider
-    // Cambia EXT si tus fotos no son .jpeg
-    const EXT = "jpeg"; // "jpg" o "png" si corresponde
-
-    for(let n=11; n<=60; n++){
-      const key = "foto" + n;
-      const file = key + "." + EXT;
-      const caption = CAPTIONS[key] || "💗 Un momento bonito que guardo contigo ✨";
-      slides.push({ img: file, text: caption });
-    }
-
     // STORY PLAYER
     const story = document.getElementById("story");
     const mainWrap = document.getElementById("mainWrap");
     const storyImg = document.getElementById("storyImg");
     const storyText = document.getElementById("storyText");
-    const storyTitle = document.getElementById("storyTitle");
     const progress = document.getElementById("progress");
     const prevBtn = document.getElementById("prevBtn");
     const nextBtn = document.getElementById("nextBtn");
+    const storyTitle = document.getElementById("storyTitle");
 
     let idx = 0;
 
@@ -1038,24 +1012,33 @@ cuidarte con amor… y elegirnos para siempre.`;
       storyImg.onload = () => storyImg.classList.add("show");
       storyImg.onerror = () => {
         storyImg.classList.add("show");
-        storyText.textContent = "⚠️ No cargó una foto.\nRevisa el nombre del archivo.\n\nSe intentó cargar:\n" + src + "\n\n(igual puedes seguir)";
+        storyText.textContent = "⚠️ No cargó una foto.\nRevisa el nombre del archivo en GitHub.\n\nSe intentó cargar:\n" + src + "\n\n(igual puedes seguir)";
       };
+    }
+
+    function fixText(t){
+      // ✅ Cambia “ustedes” -> “nosotros” (por si en algún slide quedó)
+      return (t || "").replace(/\bustedes\b/gi, "nosotros");
     }
 
     function render(){
       const slide = slides[idx];
       buildProgress();
       setImage(slide.img);
-      storyText.textContent = slide.text;
 
-      // ✅ Título con numeración
+      // ✅ título tipo (1/60) automático según cantidad de slides
       if(storyTitle){
         storyTitle.textContent = `💗 Massiel… esto es para ti (${idx+1}/${slides.length})`;
       }
 
+      storyText.textContent = fixText(slide.text);
+
       prevBtn.disabled = idx === 0;
       prevBtn.style.opacity = idx === 0 ? ".55" : "1";
       nextBtn.textContent = (idx === slides.length - 1) ? "Finalizar ✨" : "Siguiente ➜";
+
+      // ✅ si el texto era largo y hiciste scroll, vuelve arriba al cambiar slide
+      storyText.scrollTop = 0;
     }
 
     function finishStory(){
